@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
@@ -21,6 +22,12 @@ class Users(db.Model):
     perfil_especialista = db.relationship('Especialistas', backref='users')
     perfil_paciente= db.relationship('Pacientes', backref='users')
     citas = db.relationship('Citas', backref='users')
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
 
     def __repr__(self):
@@ -134,3 +141,9 @@ class Citas(db.Model):
             "created_at": self.created_at, 
             "updated_at": self.updated_at         
         }
+
+class List_Tokens(db.Model):
+    __tablename__ = 'list_tokens'
+    id = db.Column(db.Integer, primary_key=True)
+    token = db.Column(db.String(500), unique=True, nullable=False)
+    toklisted_on = db.Column(db.DateTime, nullable=False)
