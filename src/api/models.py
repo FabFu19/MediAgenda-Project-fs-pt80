@@ -47,11 +47,13 @@ class Users(db.Model):
         }
 class Pacientes(db.Model):
     __tablename__ = 'pacientes'
-    id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     telefono = db.Column(db.String(16))
     direccion = db.Column(db.String(40))
     genero = db.Column(db.String(10))
     fecha_nacimiento = db.Column(db.Date)
+
     
     def __repr__(self):
         return f'<Pacientes {self.id}>'
@@ -68,6 +70,7 @@ class Pacientes(db.Model):
 class Especialistas(db.Model):
     __tablename__ = 'especialistas'
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     especialidades = db.Column(db.String(255))
     telefono_oficina = db.Column(db.String(15))
     clinica = db.Column(db.String(15))
@@ -76,8 +79,7 @@ class Especialistas(db.Model):
     descripción = db.Column(db.String(200))
 
     #Relacion disponibilidad del medico
-    disponibilidad = db.relationship('DisponibilidadMedico', backref='especialista', lazy=True)
-    users_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    disponibilidad = db.relationship('DisponibilidadMedico', backref='especialistas', lazy=True)
 
     def __repr__(self):
         return f'<Especialistas {self.id}>'
@@ -142,6 +144,7 @@ class Citas(db.Model):
             "updated_at": self.updated_at         
         }
 
+#necesita mejoras
 class List_Tokens(db.Model):
     __tablename__ = 'list_tokens'
     id = db.Column(db.Integer, primary_key=True)

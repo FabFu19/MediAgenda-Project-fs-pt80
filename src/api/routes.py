@@ -37,7 +37,7 @@ def register():
         data = request.json
 
       
-        if not data.get('email') or not data.get('password') or not data.get('paciente'):
+        if not data.get('email') or not data.get('password'):
             return jsonify({"error": "Datos incompletos"}), 400
 
        
@@ -47,39 +47,39 @@ def register():
 
         
         new_user = Users(
-            nombre=data['nombre'],
-            apellido=data['apellido'],
-            email=data['email'],
-            password=data['password'],
-            paciente=data['paciente'],
-            is_active=True
+            nombre= data['nombre'],
+            apellido= data['apellido'],
+            email= data['email'],
+            password= data['password'],
+            paciente= data['paciente'],
+            is_active= True
         )
         new_user.set_password(data['password'])
         db.session.add(new_user)
-        db.session.commit()
 
         if data['paciente']:
-            new_patient = Pacientes(id=new_user.id)
+            new_patient = Pacientes(user_id= new_user.id)
             db.session.add(new_patient)
         else: 
-            especialista_data = data.get('especialista')
+            especialista_data = data.get('especialidades')
             if not especialista_data:
                 return jsonify({"error": "Faltan datos del especialista"}), 400
 
             new_specialist = Especialistas(
-                id=new_user.id,
-                especialidades=especialista_data['especialidades'],
-                telefono_oficina=especialista_data['telefono_oficina'],
-                clinica=especialista_data['clinica'],
-                numero_colegiatura=especialista_data['numero_colegiatura'],
-                direccion_centro_trabajo=especialista_data['direccion_centro_trabajo'],
-                descripcion=especialista_data['descripcion']
+                id= new_user.id,
+                especialidades= especialista_data['especialidades'],
+                telefono_oficina= especialista_data['telefono_oficina'],
+                clinica= especialista_data['clinica'],
+                numero_colegiatura= especialista_data['numero_colegiatura'],
+                direccion_centro_trabajo= especialista_data['direccion_centro_trabajo'],
+                descripcion= especialista_data['descripcion']
             )
             db.session.add(new_specialist)
+            print(new_specialist)
 
         db.session.commit()
 
-        access_token = create_access_token(identity={"id": new_user.id, "paciente": new_user.paciente})
+        access_token = create_access_token(identity=str(new_user.id))
         return jsonify({"msg": "Usuario registrado exitosamente", "token": access_token}), 201
 
     except Exception as e:
@@ -101,7 +101,7 @@ def login():
             return jsonify({"error": "Credenciales inválidas"}), 401
 
         # Token de acceso
-        access_token = create_access_token(identity={"id": user.id, "paciente": user.paciente})
+        access_token = create_access_token(identity={"id": str(user.id), "paciente": user.paciente})
         return jsonify({"msg": "Inicio de sesión exitoso", "token": access_token}), 200
 
     except Exception as e:
@@ -120,11 +120,11 @@ def crear_disponibilidad():
 
         data = request.json
         nueva_disponibilidad = DisponibilidadMedico(
-            medico_id=current_user['id'],
-            fecha=data['fecha'],
-            hora_inicio=data['hora_inicio'],
-            hora_final=data['hora_final'],
-            is_available=True
+            medico_id= current_user['id'],
+            fecha= data['fecha'],
+            hora_inicio= data['hora_inicio'],
+            hora_final= data['hora_final'],
+            is_available= True
         )
         db.session.add(nueva_disponibilidad)
         db.session.commit()
@@ -148,12 +148,12 @@ def agendar_cita():
 
         data = request.json
         nueva_cita = Citas(
-            paciente_id=current_user['id'],
-            medico_id=data['medico_id'],
-            estado='pendiente',
-            appointment_date=data['appointment_date'],
-            appointment_time=data['appointment_time'],
-            notes=data.get('notes', '')
+            paciente_id= current_user['id'],
+            medico_id= data['medico_id'],
+            estado= 'pendiente',
+            appointment_date= data['appointment_date'],
+            appointment_time= data['appointment_time'],
+            notes= data.get('notes', '')
         )
         db.session.add(nueva_cita)
         db.session.commit()
@@ -167,7 +167,7 @@ def agendar_cita():
 
 @api.route('/citas', methods=['GET'])
 @jwt_required()
-def listar_citas():
+def list_citas():
     try:
         current_user = get_jwt_identity()
 
