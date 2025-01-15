@@ -35,55 +35,148 @@ def handle_hello():
 def register():
     try:
         data = request.json
-        new_user = Users(
-        nombre = data['nombre'],
-        apellido = data['apellido'],
-        email = data['email'],
-        password = data['password'],
-        paciente = data['paciente']
-    )
-        
-        if not new_user.email or not new_user.password:
-            raise Exception('Contraseña o correo erroneos')
-        
-        if not Users.query.filter_by(email=new_user.email).first():
 
-            new_user_registered = Users(email=new_user.email, is_active=True)
-            new_user_registered.set_password(new_user.password)
-            db.session.add(new_user_registered)
-            db.session.commit()
-            acces_token = create_access_token(identity=str(new_user_registered.id))
-            return jsonify({"msg": "Usuario registrado exitosamente", 'token': acces_token}), 201
-        return jsonify({"msg": "Usuario ya existe, intenta hacer login"}), 400
-    except Exception as error:   
-        return jsonify({"error": str(error)}), 400
+      
+        if not data.get('email') or not data.get('password') or not data.get('paciente'):
+            return jsonify({"error": "Datos incompletos"}), 400
+
+       
+        current_user = Users.query.filter_by(email=data['email']).first()
+        if current_user:
+            return jsonify({"error": "El usuario ya existe"}), 400
+
+        
+        new_user = Users(
+            nombre=data['nombre'],
+            apellido=data['apellido'],
+            email=data['email'],
+            password=data['password'],
+            paciente=data['paciente'],
+            is_active=True
+        )
+        new_user.set_password(data['password'])
+        db.session.add(new_user)
+        db.session.commit()
+
+        if data['paciente']:
+            new_patient = Pacientes(id=new_user.id)
+            db.session.add(new_patient)
+        else: 
+            especialista_data = data.get('especialista')
+            if not especialista_data:
+                return jsonify({"error": "Faltan datos del especialista"}), 400
+
+            new_specialist = Especialistas(
+                id=new_user.id,
+                especialidades=especialista_data['especialidades'],
+                telefono_oficina=especialista_data['telefono_oficina'],
+                clinica=especialista_data['clinica'],
+                numero_colegiatura=especialista_data['numero_colegiatura'],
+                direccion_centro_trabajo=especialista_data['direccion_centro_trabajo'],
+                descripcion=especialista_data['descripcion']
+            )
+            db.session.add(new_specialist)
+
+        db.session.commit()
+
+        access_token = create_access_token(identity={"id": new_user.id, "paciente": new_user.paciente})
+        return jsonify({"msg": "Usuario registrado exitosamente", "token": access_token}), 201
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
 
 @api.route('/login', methods=['POST'])
-def user_login():
-    data = request.json
-    user = Users.query.filter_by(email=data['email']).first()
-    if not user or not user.password == data['password']:
-        acces_token = create_access_token(identity={"id": str(user.id)})
-        return jsonify(acces_token=acces_token), 200
-    return jsonify({"error": "Credenciales inválidas"}), 401
+def login():
+    try:
+        data = request.json
+
+       
+        if not data.get('email') or not data.get('password'):
+            return jsonify({"error": "Datos incompletos"}), 400
+
+        user = Users.query.filter_by(email=data['email']).first()
+
+        if not user or not user.check_password(data['password']):
+            return jsonify({"error": "Credenciales inválidas"}), 401
+
+        # Token de acceso
+        access_token = create_access_token(identity={"id": user.id, "paciente": user.paciente})
+        return jsonify({"msg": "Inicio de sesión exitoso", "token": access_token}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 @api.route('/disponibilidad', methods=['POST'])
 @jwt_required()
 def crear_disponibilidad():
-    current_user = get_jwt_identity
-    medico = Especialistas.query.filter_by(id=current_user['id']).first()
+    try:
+        current_user = get_jwt_identity()
 
-    if not medico:
-        return jsonify({"error": "Sin autorización"}), 403
-    
-    data = request.json
-    nueva_disponibilidad = DisponibilidadMedico(
-        medico_id = medico.id,
-        fecha= data['fecha'],
-        hora_inicio= data['hora_inicio'],
-        hora_final= data['hora_final'],
-        is_available = True
-    )
-    db.session.add(nueva_disponibilidad)
-    db.session.commit()
-    return jsonify({"msg": "Disponibilidad creada exitosamente"}), 201
+        # Verificar si el usuario es un médico
+        if current_user['paciente']:
+            return jsonify({"error": "No autorizado"}), 403
+
+        data = request.json
+        nueva_disponibilidad = DisponibilidadMedico(
+            medico_id=current_user['id'],
+            fecha=data['fecha'],
+            hora_inicio=data['hora_inicio'],
+            hora_final=data['hora_final'],
+            is_available=True
+        )
+        db.session.add(nueva_disponibilidad)
+        db.session.commit()
+
+        return jsonify({"msg": "Disponibilidad creada exitosamente"}), 201
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+
+@api.route('/citas', methods=['POST'])
+@jwt_required()
+def agendar_cita():
+    try:
+        current_user = get_jwt_identity()
+
+        
+        if not current_user['paciente']:
+            return jsonify({"error": "No autorizado"}), 403
+
+        data = request.json
+        nueva_cita = Citas(
+            paciente_id=current_user['id'],
+            medico_id=data['medico_id'],
+            estado='pendiente',
+            appointment_date=data['appointment_date'],
+            appointment_time=data['appointment_time'],
+            notes=data.get('notes', '')
+        )
+        db.session.add(nueva_cita)
+        db.session.commit()
+
+        return jsonify({"msg": "Cita agendada exitosamente"}), 201
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+
+@api.route('/citas', methods=['GET'])
+@jwt_required()
+def listar_citas():
+    try:
+        current_user = get_jwt_identity()
+
+        if current_user['paciente']:
+            citas = Citas.query.filter_by(paciente_id=current_user['id']).all()
+        else:
+            citas = Citas.query.filter_by(medico_id=current_user['id']).all()
+
+        return jsonify([cita.serialize() for cita in citas]), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
