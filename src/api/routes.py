@@ -31,59 +31,59 @@ def handle_hello():
 
 #MediAgenda endpoints
 
+
 @api.route('/register', methods=['POST'])
 def register():
     try:
         data = request.json
+        print("Datos recibidos:", data)
 
-      
         if not data.get('email') or not data.get('password'):
             return jsonify({"error": "Datos incompletos"}), 400
 
-       
         current_user = Users.query.filter_by(email=data['email']).first()
         if current_user:
             return jsonify({"error": "El usuario ya existe"}), 400
 
-        
+     
         new_user = Users(
-            nombre= data['nombre'],
-            apellido= data['apellido'],
-            email= data['email'],
-            password= data['password'],
-            paciente= data['paciente'],
-            is_active= True
+            nombre=data['nombre'],
+            apellido=data['apellido'],
+            email=data['email'],
+            password=data['password'],
+            paciente=data['paciente'],
+            is_active=True
         )
         new_user.set_password(data['password'])
         db.session.add(new_user)
+        db.session.flush()  # Para obtener el ID antes de hacer commit
 
+
+    
         if data['paciente']:
-            new_patient = Pacientes(user_id= new_user.id)
+            new_patient = Pacientes(user_id=new_user.id)
             db.session.add(new_patient)
-        else: 
-            especialista_data = data.get('especialidades')
-            if not especialista_data:
-                return jsonify({"error": "Faltan datos del especialista"}), 400
-
+        else:
+            print("especialista_data:", data.get('especialidades'))
             new_specialist = Especialistas(
-                id= new_user.id,
-                especialidades= especialista_data['especialidades'],
-                telefono_oficina= especialista_data['telefono_oficina'],
-                clinica= especialista_data['clinica'],
-                numero_colegiatura= especialista_data['numero_colegiatura'],
-                direccion_centro_trabajo= especialista_data['direccion_centro_trabajo'],
-                descripcion= especialista_data['descripcion']
+                user_id=new_user.id,
+                especialidades=data.get('especialidades', None),
+                telefono_oficina=data.get('telefono_oficina', None),
+                clinica=data.get('clinica', None),
+                numero_colegiatura=data.get('numero_colegiatura', None),
+                direccion_centro_trabajo=data.get('direccion_centro_trabajo', None),
+                descripcion=data.get('descripcion', None)
             )
             db.session.add(new_specialist)
-            print(new_specialist)
 
         db.session.commit()
-
+      
         access_token = create_access_token(identity=str(new_user.id))
         return jsonify({"msg": "Usuario registrado exitosamente", "token": access_token}), 201
 
     except Exception as e:
         db.session.rollback()
+        print("Error:", str(e))
         return jsonify({"error": str(e)}), 500
 
 @api.route('/login', methods=['POST'])
@@ -148,11 +148,11 @@ def agendar_cita():
 
         data = request.json
         nueva_cita = Citas(
-            paciente_id= current_user['id'],
-            medico_id= data['medico_id'],
+            paciente_id= current_user,
+            medico_id= data.get('medico_id', None),
             estado= 'pendiente',
-            appointment_date= data['appointment_date'],
-            appointment_time= data['appointment_time'],
+            appointment_date= data.get('appointment_date', None),
+            appointment_time= data.get('appointment_time', None),
             notes= data.get('notes', '')
         )
         db.session.add(nueva_cita)

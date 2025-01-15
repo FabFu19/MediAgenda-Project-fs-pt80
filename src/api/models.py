@@ -76,7 +76,7 @@ class Especialistas(db.Model):
     clinica = db.Column(db.String(15))
     numero_colegiatura= db.Column(db.String(9))
     direccion_centro_trabajo = db.Column(db.String(30))
-    descripción = db.Column(db.String(200))
+    descripcion = db.Column(db.String(200))
 
     #Relacion disponibilidad del medico
     disponibilidad = db.relationship('DisponibilidadMedico', backref='especialistas', lazy=True)
@@ -92,7 +92,7 @@ class Especialistas(db.Model):
             "clinica": self.clinica,
             "numero_colegiatura": self.numero_colegiatura,
             "direccion_centro_trabajo": self.direccion_centro_trabajo,
-            "descripcion": self.descripción            
+            "descripcion": self.descripcion            
         }
 class DisponibilidadMedico(db.Model):
     __tablename__ = 'disponibilidadMedico'
@@ -111,8 +111,8 @@ class DisponibilidadMedico(db.Model):
             "id": self.id,
             "medico_id": self.medico_id,
             "fecha": self.fecha,
-            "hora_inicio": self.hora_inicio,
-            "hora_final": self.hora_final,
+            "hora_inicio": self.hora_inicio.strftime('%H:%M'),
+            "hora_final": self.hora_final.strftime('%H:%M'),
             "is_available": self.is_available           
         }
 
@@ -135,7 +135,7 @@ class Citas(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "paciente_id": self.medico_id,
+            "paciente_id": self.paciente_id,
             "estado": self.estado,
             "appointment_date": self.appointment_date,
             "appointment_time": self.appointment_time.strftime('%H:%M'),
