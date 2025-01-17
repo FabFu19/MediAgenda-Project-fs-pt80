@@ -129,9 +129,6 @@ def crear_disponibilidad():
 def agendar_cita():
     try:
         current_user = get_jwt_identity()
-        print("Datos del token:", current_user)
-
-        
         
         data = request.json
         nueva_cita = Citas(
@@ -159,10 +156,10 @@ def list_citas():
     try:
         current_user = get_jwt_identity()
 
-        if current_user['paciente']:
-            citas = Citas.query.filter_by(paciente_id=current_user['id']).all()
+        if current_user:
+            citas = Citas.query.filter_by(paciente_id=current_user).all()
         else:
-            citas = Citas.query.filter_by(medico_id=current_user['id']).all()
+            citas = Citas.query.filter_by(medico_id=current_user['medico_id']).all()
 
         return jsonify([cita.serialize() for cita in citas]), 200
 

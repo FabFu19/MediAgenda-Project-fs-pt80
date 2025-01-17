@@ -127,7 +127,7 @@ class Citas(db.Model):
     appointment_date = db.Column(db.Date, nullable=False)
     appointment_time = db.Column(db.Time, nullable=False)
     notes = db.Column(db.String(250))
-    create_at = db.Column(db.DateTime, default=datetime.now)
+    created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime)
 
     def __repr__(self):
