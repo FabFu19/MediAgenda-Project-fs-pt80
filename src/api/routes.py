@@ -19,18 +19,7 @@ CORS(api)
 
 
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
-
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
-
-    return jsonify(response_body), 200
-
-
 #MediAgenda endpoints
-
 
 @api.route('/register', methods=['POST'])
 def register():
@@ -41,11 +30,11 @@ def register():
         if not data.get('email') or not data.get('password'):
             return jsonify({"error": "Datos incompletos"}), 400
 
-        current_user = Users.query.filter_by(email=data['email']).first()
-        if current_user:
+        existing_user = Users.query.filter_by(email=data['email']).first()
+        if existing_user:
             return jsonify({"error": "El usuario ya existe"}), 400
 
-     
+        # Crear usuario
         new_user = Users(
             nombre=data['nombre'],
             apellido=data['apellido'],
@@ -59,7 +48,7 @@ def register():
         db.session.flush()  # Para obtener el ID antes de hacer commit
 
 
-    
+        # Crear perfil de paciente o especialista
         if data['paciente']:
             new_patient = Pacientes(user_id=new_user.id)
             db.session.add(new_patient)
@@ -77,7 +66,7 @@ def register():
             db.session.add(new_specialist)
 
         db.session.commit()
-      
+        # Crear token
         access_token = create_access_token(identity=str(new_user.id))
         return jsonify({"msg": "Usuario registrado exitosamente", "token": access_token}), 201
 
@@ -86,12 +75,12 @@ def register():
         print("Error:", str(e))
         return jsonify({"error": str(e)}), 500
 
+
 @api.route('/login', methods=['POST'])
 def login():
     try:
         data = request.json
 
-       
         if not data.get('email') or not data.get('password'):
             return jsonify({"error": "Datos incompletos"}), 400
 
@@ -100,8 +89,9 @@ def login():
         if not user or not user.check_password(data['password']):
             return jsonify({"error": "Credenciales inválidas"}), 401
 
-        # Token de acceso
-        access_token = create_access_token(identity={"id": str(user.id), "paciente": user.paciente})
+        # Crear token con el ID y el rol del usuario
+        access_token = create_access_token(identity=str(user.id))
+
         return jsonify({"msg": "Inicio de sesión exitoso", "token": access_token}), 200
 
     except Exception as e:
@@ -113,14 +103,12 @@ def login():
 def crear_disponibilidad():
     try:
         current_user = get_jwt_identity()
-
-        # Verificar si el usuario es un médico
-        if current_user['paciente']:
-            return jsonify({"error": "No autorizado"}), 403
-
+        especialista = Especialistas.query.filter_by(user_id = current_user).first() 
+        if not especialista: 
+            return jsonify({'error': 'No autorizado'})
         data = request.json
         nueva_disponibilidad = DisponibilidadMedico(
-            medico_id= current_user['id'],
+            medico_id= especialista.id,
             fecha= data['fecha'],
             hora_inicio= data['hora_inicio'],
             hora_final= data['hora_final'],
@@ -141,27 +129,27 @@ def crear_disponibilidad():
 def agendar_cita():
     try:
         current_user = get_jwt_identity()
+        print("Datos del token:", current_user)
 
         
-        if not current_user['paciente']:
-            return jsonify({"error": "No autorizado"}), 403
-
+        
         data = request.json
         nueva_cita = Citas(
-            paciente_id= current_user,
-            medico_id= data.get('medico_id', None),
-            estado= 'pendiente',
-            appointment_date= data.get('appointment_date', None),
-            appointment_time= data.get('appointment_time', None),
-            notes= data.get('notes', '')
+            paciente_id=current_user, 
+            medico_id=data.get('medico_id'),
+            estado='pendiente',
+            appointment_date=data.get('appointment_date'),
+            appointment_time=data.get('appointment_time'),
+            notes=data.get('notes', '')
         )
         db.session.add(nueva_cita)
         db.session.commit()
 
-        return jsonify({"msg": "Cita agendada exitosamente"}), 201
+        return jsonify({"msg": "Cita agendada exitosamente", }), 201
 
     except Exception as e:
         db.session.rollback()
+        print("Error al agendar cita:", str(e)) 
         return jsonify({"error": str(e)}), 500
 
 

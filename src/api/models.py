@@ -61,7 +61,7 @@ class Pacientes(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "dirección": self.direccion,
+            "direccion": self.direccion,
             "telefono": self.telefono,
             "genero": self.genero,
             "fecha_nacimiento": self.fecha_nacimiento            
@@ -87,6 +87,7 @@ class Especialistas(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "user_id": self.user_id,
             "especialidades": self.especialidades,
             "telefono_oficina": self.telefono_oficina,
             "clinica": self.clinica,
@@ -121,10 +122,10 @@ class Citas(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     paciente_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     medico_id = db.Column(db.Integer, db.ForeignKey('especialistas.id'), nullable=False)
-    estado = db.Column(db.Enum('pendiente', 'disponible', 'cancelado', 'completado', name='status_enum'), 
+    estado = db.Column(db.Enum('pendiente', 'disponible', 'cancelado', 'completado', name='status_enum',), 
         nullable=False)
-    appointment_date = db.Column(db.Date)
-    appointment_time = db.Column(db.Time)
+    appointment_date = db.Column(db.Date, nullable=False)
+    appointment_time = db.Column(db.Time, nullable=False)
     notes = db.Column(db.String(250))
     create_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime)
@@ -136,8 +137,9 @@ class Citas(db.Model):
         return {
             "id": self.id,
             "paciente_id": self.paciente_id,
+            "medico_id": self.medico_id,
             "estado": self.estado,
-            "appointment_date": self.appointment_date,
+            "appointment_date": self.appointment_date.isoformat(),
             "appointment_time": self.appointment_time.strftime('%H:%M'),
             "notes": self.notes,
             "created_at": self.created_at, 
