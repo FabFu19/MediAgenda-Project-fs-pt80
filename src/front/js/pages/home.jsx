@@ -3,13 +3,10 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
-import React from "react";
-import "./home.css";
-
 const Home = () => {
   return (
     <div className="home">
-      {/* Cabecera */}
+      //Cabecera
       <header className="home-header">
         <div className="logo">MEDIAGENDA</div>
         <nav className="nav-menu">
@@ -20,7 +17,7 @@ const Home = () => {
         </nav>
       </header>
 
-      {/* Sección Principal */}
+      //Sección Principal
       <section className="hero-section">
         <div className="hero-text">
           <h1>Schedule your appointment easily</h1>
@@ -32,7 +29,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Sección "What do we do?" */}
+      //Sección "What do we do?"
       <section className="what-we-do" id="about-us">
         <h2>What do we do?</h2>
         <p>
@@ -42,7 +39,7 @@ const Home = () => {
         </p>
       </section>
 
-      {/* Carrusel de Profesionales */}
+      //Carrusel de Profesionales
       <section className="professional-slide">
         <h2>Our Professionals</h2>
         <div className="carousel">
@@ -65,7 +62,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Sección "Find Your Doctor" */}
+      //Sección "Find Your Doctor"
       <section className="find-doctor">
         <h2>Find Your Doctor</h2>
         <div className="search-bar">
@@ -78,7 +75,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Sección "Medical Suggestions" */}
+      //Sección "Medical Suggestions"
       <section className="medical-suggestions">
         <h2>Medical Suggestions</h2>
         <blockquote className="suggestion">
