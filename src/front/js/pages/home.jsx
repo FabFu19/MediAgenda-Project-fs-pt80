@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
-const Home = () => {
+export const Home = () => {
   return (
     <div className="home">
       //Cabecera
@@ -89,5 +88,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;
