@@ -1,0 +1,15 @@
+.navbar-principal-classes {
+    background-color: #CDC7ED;
+}
+
+.navb-container{
+    margin-left: 11px;
+    margin-right: 11px;
+}
+
+.nav-logo{
+    width: 145px;
+    height: 61px;
+    background-size: cover;
+    margin-top: 12px;
+}
