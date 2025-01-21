@@ -1,41 +1,35 @@
 import React from "react";
-import logo from "../../img/logo-medi.png";
+import logo from "../../img/logo-medi-2.png";
 // import { Link } from "react-router-dom";
 
 export const Navbar = () => {
 	return (
 		<>
-			<nav className="navbar navbar-expand-lg navbar-light navbar-principal-classes">
-				<div className="container-fluid navb-container">
-					<button
-						className="navbar-toggler"
-						type="button"
-						data-bs-toggle="collapse"
-						data-bs-target="#navbarTogglerDemo01"
-						aria-controls="navbarTogglerDemo01"
-						aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span className="navbar-toggler-icon"></span>
-					</button>
-					<div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-						<a className="navbar-brand" href="#">
-							<img src={logo} alt="logo" className="nav-logo img-fluid"/>
-						</a>
-						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
+			<nav className="navbar navbar-expand-lg navbar-light pt-0 pb-0 navbar-principal-classes h-auto">
+				<div className="d-flex w-100">
+					<div className="d-flex w-100 align-items-center">
+						<img src={logo} alt="logo" className="nav-logo img-fluid" />
+						<ul className="navbar-nav ms-auto nav_links">
 							<li className="nav-item">
-								<a className="nav-link active" aria-current="page" href="#">Home</a>
+								<a className="nav-link nav-text " aria-current="page" href="#">About us</a>
 							</li>
 							<li className="nav-item">
-								<a className="nav-link" href="#">Features</a>
-							</li>
-							<li className="nav-item">
-								<a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</a>
+								<a className="nav-link nav-text" href="#">Support</a>
 							</li>
 						</ul>
-						<div className="btn btn-outline-success" type="submit">Search</div>
+					</div>
+					<div className="nav-btn-container">
+						<div className="btn custom-btn special_margin" type="submit">
+							<p>Login</p>
+						</div>
+						<div className="btn custom-btn special_margin" type="submit">
+							<p>Register</p>
+						</div>
 					</div>
 				</div>
 			</nav>
+			
+			
 		</>
 	);
 };
