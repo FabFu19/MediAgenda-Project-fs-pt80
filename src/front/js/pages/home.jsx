@@ -4,7 +4,7 @@ import "../../styles/home.css";
 
 export const Home = () => {
   return (
-    <div className="home">
+    <div className="home_body">
       //Cabecera
       <header className="home-header">
         <div className="logo">MEDIAGENDA</div>
