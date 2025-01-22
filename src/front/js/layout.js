@@ -11,7 +11,7 @@ import injectContext from "./store/appContext";
 
 
 import { Navbar } from "./component/navbar.jsx";
-import { Footer } from "./component/footer";
+import { Footer } from "./component/footer.jsx";
 import { Profile } from "./pages/profile.jsx";
 import { LoginRegister } from "./component/loginregister.jsx";
 
