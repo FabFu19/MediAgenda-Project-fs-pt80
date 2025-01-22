@@ -1,23 +1,15 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
+import group21Image from "../../img/Group 21.png";
+import image15 from "../../img/image 15.png";
+import image16 from "../../img/image 16.png";
+import image17 from "../../img/image 17.png";
 import "../../styles/home.css"
 
 
 export const Home = () => {
   return (
     <div className="home_body">
-      //Cabecera
-      <header className="home-header">
-        <div className="logo">MEDIAGENDA</div>
-        <nav className="nav-menu">
-          <a href="#about-us">About us</a>
-          <a href="#support">Support</a>
-          <button className="btn-login">Login</button>
-          <button className="btn-register">Register</button>
-        </nav>
-      </header>
-
       //Sección Principal
       <section className="hero-section">
         <div className="hero-text">
@@ -26,7 +18,7 @@ export const Home = () => {
           <button className="btn-appointment">Take an Appointment</button>
         </div>
         <div className="hero-image">
-          <img src="/path-to-your-image/hero-laptop.png" alt="Laptop with calendar" />
+          <img src={group21Image} alt="Laptop with calendar" />
         </div>
       </section>
 
@@ -46,16 +38,16 @@ export const Home = () => {
         <div className="carousel">
           <button className="carousel-btn prev">{"<"}</button>
           <div className="carousel-items">
-            <div className="carousel-item">
-              <img src="/path-to-your-image/doctor1.png" alt="Doctor 1" />
+            <div className="carousel-item1">
+              <img src={image15} alt="Doctor 1" />
               <p>Dr. Jane Doe</p>
             </div>
-            <div className="carousel-item">
-              <img src="/path-to-your-image/doctor2.png" alt="Doctor 2" />
+            <div className="carousel-item2">
+              <img src={image16} alt="Doctor 2" />
               <p>Dr. John Smith</p>
             </div>
-            <div className="carousel-item">
-              <img src="/path-to-your-image/doctor3.png" alt="Doctor 3" />
+            <div className="carousel-item3">
+              <img src={image17} alt="Doctor 3" />
               <p>Dr. Emily Brown</p>
             </div>
           </div>
