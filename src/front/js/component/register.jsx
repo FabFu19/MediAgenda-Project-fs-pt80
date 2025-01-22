@@ -10,7 +10,7 @@ export const Register = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (profileType === "teacher") {
+        if (profileType === "doctor") {
             console.log("Redirecting to Specialist form...");
         } else {
             console.log("Registering as Patient...");
@@ -27,7 +27,7 @@ export const Register = () => {
                     width: "100%", 
                     maxWidth: "400px", 
                     borderRadius: "15px", 
-                    backgroundColor: "rgba(111, 76, 176, 0.33)" 
+                    backgroundColor: "rgba(111, 76, 176, 0.33)", 
                 }}
             >
                 <h3 
@@ -45,7 +45,11 @@ export const Register = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="row">
                         <div className="col-6 mb-3">
-                            <label htmlFor="Name" className="form-label">First Name:</label>
+                        <label 
+                            htmlFor="phone" 
+                            className="form-label" 
+                            style={{ color: "#3E2F9C" }}
+                        >First Name:</label>
                             <input 
                                 type="text" 
                                 className="form-control" 
@@ -60,7 +64,11 @@ export const Register = () => {
                             />
                         </div>
                         <div className="col-6 mb-3">
-                            <label htmlFor="lastName" className="form-label">Last Name:</label>
+                        <label 
+                            htmlFor="phone" 
+                            className="form-label" 
+                            style={{ color: "#3E2F9C" }}
+                        >Last Name:</label>
                             <input 
                                 type="text" 
                                 className="form-control" 
@@ -76,7 +84,11 @@ export const Register = () => {
                         </div>
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="phone" className="form-label">Phone:</label>
+                    <label 
+                            htmlFor="phone" 
+                            className="form-label" 
+                            style={{ color: "#3E2F9C" }}
+                        >Phone:</label>
                         <input 
                             type="tel" 
                             className="form-control" 
@@ -91,7 +103,11 @@ export const Register = () => {
                         />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="email" className="form-label">Email:</label>
+                    <label 
+                            htmlFor="phone" 
+                            className="form-label" 
+                            style={{ color: "#3E2F9C" }}
+                        >Email:</label>
                         <input 
                             type="email" 
                             className="form-control" 
@@ -106,7 +122,11 @@ export const Register = () => {
                         />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="password" className="form-label">Password:</label>
+                    <label 
+                            htmlFor="phone" 
+                            className="form-label" 
+                            style={{ color: "#3E2F9C" }}
+                        >Password:</label>
                         <input 
                             type="password" 
                             className="form-control" 
@@ -121,7 +141,11 @@ export const Register = () => {
                         />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="profileType" className="form-label">Profile type:</label>
+                    <label 
+                            htmlFor="phone" 
+                            className="form-label" 
+                            style={{ color: "#3E2F9C" }}
+                        >Profile type:</label>
                         <select 
                             id="profileType" 
                             className="form-select" 
@@ -140,9 +164,9 @@ export const Register = () => {
                             <option value="Patient" style={{
                                 backgroundColor: "rgba(111, 76, 176, 0.33)", 
                             }}>Patient</option>
-                            <option value="Specialist" style={{
+                            <option value="Doctor" style={{
                                 backgroundColor: "rgba(111, 76, 176, 0.33)", 
-                            }}>Specialist</option>
+                            }}>Doctor</option>
                         </select>
                     </div>
                     {profileType === "Doctor" ? (
@@ -172,7 +196,7 @@ export const Register = () => {
                                 marginTop: "10px",
                                 fontSize: "12px",
                                 width: "35%",
-                                color: "white"
+                                color: "white",
                             }}
                         >
                             Register
