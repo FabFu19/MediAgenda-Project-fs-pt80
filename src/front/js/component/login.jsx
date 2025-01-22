@@ -1,6 +1,6 @@
 import React from "react";
 
-export const LoginRegister = () => {
+export const Login = () => {
     return (
         <div 
             className="d-flex justify-content-center align-items-center vh-100" 
