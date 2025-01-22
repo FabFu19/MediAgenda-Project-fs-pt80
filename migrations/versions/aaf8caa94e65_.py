@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 213fa003aa32
+Revision ID: aaf8caa94e65
 Revises: 
-Create Date: 2025-01-15 18:21:06.794159
+Create Date: 2025-01-20 17:45:34.438734
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '213fa003aa32'
+revision = 'aaf8caa94e65'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -40,14 +40,14 @@ def upgrade():
     )
     op.create_table('especialistas',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('especialidades', sa.String(length=255), nullable=True),
     sa.Column('telefono_oficina', sa.String(length=15), nullable=True),
     sa.Column('clinica', sa.String(length=15), nullable=True),
     sa.Column('numero_colegiatura', sa.String(length=9), nullable=True),
     sa.Column('direccion_centro_trabajo', sa.String(length=30), nullable=True),
-    sa.Column('descripción', sa.String(length=200), nullable=True),
-    sa.Column('users_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['users_id'], ['users.id'], ),
+    sa.Column('descripcion', sa.String(length=200), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('pacientes',
@@ -65,10 +65,10 @@ def upgrade():
     sa.Column('paciente_id', sa.Integer(), nullable=False),
     sa.Column('medico_id', sa.Integer(), nullable=False),
     sa.Column('estado', sa.Enum('pendiente', 'disponible', 'cancelado', 'completado', name='status_enum'), nullable=False),
-    sa.Column('appointment_date', sa.Date(), nullable=True),
-    sa.Column('appointment_time', sa.Time(), nullable=True),
+    sa.Column('appointment_date', sa.Date(), nullable=False),
+    sa.Column('appointment_time', sa.Time(), nullable=False),
     sa.Column('notes', sa.String(length=250), nullable=True),
-    sa.Column('create_at', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['medico_id'], ['especialistas.id'], ),
     sa.ForeignKeyConstraint(['paciente_id'], ['users.id'], ),
