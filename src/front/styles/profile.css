@@ -1,5 +1,13 @@
+
+.profile-body{
+    background-color: rgba(205, 199, 237, 0.25);;
+}
+.prof-pinci-title{
+    font-family: "Alata", serif;
+    color: #3E2F9C;
+    font-size: 34px;
+}
 .profile-container{
-    background-color: rgba(205, 199, 237, 0.14);
     padding: 15px;
     
 }
@@ -10,7 +18,135 @@
     border-radius: 21px;
     padding: 30px 19px 25px 19px;
     display: flex;
+    margin-right: auto;
 }
 .container-info-profile{
     font-family: "Gantari", serif;
+    margin-right: auto;
+}
+
+.require-data-title{
+    font-size: 17px;
+    color: #3E2F9C;
+    margin-bottom: 0px;
+}
+.require-data-info{
+    font-size: 16px;
+    color: #ffff;
+    margin-bottom: 6px;
+}
+.prof-edit-icon{
+    font-size: 21px;
+    color: #ffff;
+}
+.dot-states{
+    display: flex;
+    flex-direction: column;
+}
+.dot-states > img{
+    width: 25px;
+    height: 25px;
+    background-size: cover;
+    margin-bottom: 5px;
+}
+
+.choose-speci-box{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(111, 76, 176, 0.25);
+    border-radius: 57px;
+    margin-right: auto;
+    padding: 10px 0 0 25px; 
+}
+
+.select-speciality{
+    font-size: 26px;
+    color: #3E2F9C;
+    margin-top: 16px;
+    margin-bottom: auto;
+}
+
+.esp-pic{
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+}
+
+.comming-s-box{
+    background-color: rgba(111, 76, 176, 0.25);
+    width: 100%;
+    height: 100%;
+    border-radius: 57px;
+    padding: 29px 33px 29px 33px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.comming-text{
+    font-size: 26px;
+    font-family: "Alata", serif;
+    color: rgba(111, 76, 176, 0.64);
+}
+.prof-list-container{
+    background-color: rgba(111, 76, 176, 0.25);
+    width: 100%;
+    height: 100%;
+    border-radius: 57px;
+    padding: 27px 16px 27px 16px;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+.prof-sec-title{
+    font-family: "Alata", serif;
+    color: #3E2F9C;
+    font-size: 19px;
+    align-self: center;
+    margin-bottom: 14px;
+}
+.prof-list-container > ul{
+    padding-left: 0;
+}
+.content-appoint-data{
+    background-color: rgba(111, 76, 176, 0.25);
+    width: 100%;
+    height: 100%;
+    border-radius: 57px;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+}
+
+.data-text-appoint{
+    background-color: rgba(111, 76, 176, 0.25);
+    width: 100%;
+    height: 100%;
+    border-radius: 57px;
+}
+.name-appoint{
+    font-family: "Gantari", serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #ffff;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    margin-top: 9px;
+}
+
+.date-appoint{
+    font-family: "Gantari", serif;
+    font-size: 11px;
+    color: #ffff;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.img-status{
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    margin-left: 10px;
+    margin-right: 10px;
 }
