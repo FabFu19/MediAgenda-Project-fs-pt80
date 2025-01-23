@@ -14,9 +14,10 @@ export const Login = () => {
                     style={{ 
                         color: "#4a148c", 
                         position: "absolute", 
-                        top: "-50px", 
+                        top: "-32px",  
                         left: "15px", 
-                        margin: "0" 
+                        margin: "0",
+                        fontSize: "24px"
                     }}
                 >
                     Login
@@ -75,7 +76,7 @@ export const Login = () => {
                             style={{ 
                                 backgroundColor: "#4a148c", 
                                 padding: "8px", 
-                                fontSize: "18px", 
+                                fontSize: "16px", 
                                 borderRadius: "20px", 
                                 width: "35%" 
                             }}
