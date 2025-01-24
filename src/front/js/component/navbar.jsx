@@ -1,39 +1,49 @@
-import React from "react";
-import logo from "../../img/logo-medi.png";
-// import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import logo from "../../img/logo-medi-2.png";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
+	const [isOpen, setIsOpen] = useState(false)
 	return (
 		<>
-			<nav className="navbar navbar-expand-lg navbar-light navbar-principal-classes">
-				<div className="container-fluid navb-container">
-					<button
-						className="navbar-toggler"
-						type="button"
-						data-bs-toggle="collapse"
-						data-bs-target="#navbarTogglerDemo01"
-						aria-controls="navbarTogglerDemo01"
-						aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span className="navbar-toggler-icon"></span>
-					</button>
-					<div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-						<a className="navbar-brand" href="#">
-							<img src={logo} alt="logo" className="nav-logo img-fluid"/>
-						</a>
-						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
-							<li className="nav-item">
-								<a className="nav-link active" aria-current="page" href="#">Home</a>
+			<nav className="navbar navbar-expand-lg navbar-light pt-0 pb-0 navbar-principal-classes h-auto">
+				<div className="d-flex w-100">
+					<Link to="/" className="nav-content-img">
+							<img src={logo} alt="logo" className="nav-logo" />
+					</Link>
+					<div className={`align-items-center nav-container-items ${ isOpen && 'open'}`}>
+						<ul className="navbar-nav nav_links">
+							<li className="nav-item me-3 nav-text-content">
+								<Link to="/" className="nav-link nav-text " aria-current="page">About us</Link>
 							</li>
 							<li className="nav-item">
-								<a className="nav-link" href="#">Features</a>
+								<Link to="/" className="nav-link nav-text">Support</Link>
 							</li>
-							<li className="nav-item">
-								<a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</a>
-							</li>
+							<div className="nav-btn-container-responsive">
+								<Link to="/" className="btn custom-btn special_margin" type="submit">
+									<p>Login</p>
+								</Link>
+								<Link to="/" className="btn custom-btn special_margin" type="submit">
+									<p>Register</p>
+								</Link>
+							</div>
 						</ul>
-						<div className="btn btn-outline-success" type="submit">Search</div>
+						
 					</div>
+					<li className="nav-btn-container">
+						<Link to="/" className="btn custom-btn special_margin" type="submit">
+							<p>Login</p>
+						</Link>
+						<Link to="/" className="btn custom-btn special_margin" type="submit">
+							<p>Register</p>
+						</Link>
+					</li>
+					<div className={`nav-toggle ${ isOpen && 'open'}`} onClick={() => setIsOpen(!isOpen)}>
+						<span></span>
+						<span></span>
+						<span className="bar-special-style"></span>
+					</div>
+					
 				</div>
 			</nav>
 		</>
