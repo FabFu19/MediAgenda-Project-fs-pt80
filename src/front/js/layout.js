@@ -14,7 +14,6 @@ import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 import { Profile } from "./pages/profile.jsx";
 import { LoginRegister } from "./component/loginregister.jsx";
-import { Footer } from "./component/footer";
 import { book_appointment } from "./component/book_appointment.jsx";
 
 //create your first component
