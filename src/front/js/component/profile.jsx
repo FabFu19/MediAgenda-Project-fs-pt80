@@ -6,7 +6,9 @@ import doctor_1 from "../../img/doctor5.png";
 import { Link } from "react-router-dom";
 
 
+
 export const PatientProfile = () => {
+    
     return(
         <>
             <div className="col-sm-12 col-md-7 col-lg-7">
@@ -37,9 +39,9 @@ export const PatientProfile = () => {
                     </div>
                     <div className="dot-states mascara">
                         
-                        <button type="button" className="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="beautifier"title="Available">
+                        <span className="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Available">
                             <img src={circle_1} alt="circle1"/>
-                        </button>
+                        </span>
                         {/* <div className="tooltip bs-tooltip-top" role="tooltip">
                             <div className="tooltip-arrow"></div>
                             <div className="tooltip-inner">
@@ -66,7 +68,7 @@ export const PatientProfile = () => {
                     
                 </div>
             </div>
-            <div className="col-sm-12 col-md-5 col-lg-5">
+            <div className="col-sm-12 col-md-5 col-lg-5 pt-5">
                 <div className="prof-list-container">
                     <h1 className="prof-sec-title">Appointment Status</h1>
                     <ul>
