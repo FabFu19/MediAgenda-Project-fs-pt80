@@ -1,0 +1,152 @@
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'gantari', sans-serif;
+  background-color: #e8e6f1;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-title {
+  font-size: 1.8rem;
+  color: #6c48b0;
+  margin-bottom: 1.5rem;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-weekday {
+  text-align: center;
+  font-weight: bold;
+  color: #6c48b0;
+  font-size: 1rem;
+}
+
+.calendar-day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: #dcd3f0;
+  border-radius: 0.5rem;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 1rem;
+}
+
+.calendar-day:hover {
+  background-color: #b9a6e3;
+  transform: scale(1.1);
+}
+
+.calendar-day.selected {
+  background-color: #6c48b0;
+  color: white;
+  font-weight: bold;
+}
+
+.appointment-details {
+  background-color: #6c48b0;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.appointment-details p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.time-selector {
+  margin-top: 0.5rem;
+}
+
+.time-selector label {
+  font-weight: bold;
+}
+
+.time-selector input {
+  margin-left: 0.5rem;
+  padding: 0.3rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1rem;
+}
+
+.appointments-list {
+  width: 100%;
+  background-color: #f3f0fa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.appointment-item {
+  color: #6c48b0;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.schedule-button {
+  background-color: #6c48b0;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.schedule-button:hover {
+  background-color: #563392;
+}
+
+@media (max-width: 768px) {
+  .calendar {
+    gap: 0.4rem;
+  }
+
+  .calendar-day {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  .appointment-details,
+  .appointments-list {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-container {
+    padding: 1rem;
+  }
+
+  .calendar-day {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.8rem;
+  }
+
+  .schedule-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
