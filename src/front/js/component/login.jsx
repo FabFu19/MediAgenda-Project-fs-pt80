@@ -85,7 +85,7 @@ export const Login = () => {
                         </button>
                         <p className="text-center mt-3">
                             <small>
-                                If you are not registered you can <a href="https://studious-computing-machine-v6g54v55jp693pj6r-3000.app.github.dev/register" className="text-danger" style={{ fontSize: "12px" }}>register here</a>.
+                                If you are not registered you can <a href="https://congenial-capybara-v6g54v55jgp5hxqr7-3000.app.github.dev/register" className="text-danger" style={{ fontSize: "12px" }}>register here</a>.
                             </small>
                         </p>
                     </form>
