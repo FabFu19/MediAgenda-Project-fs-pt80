@@ -1,67 +1,89 @@
-.register-container {
+.doctor-register-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    width: 100vw;
+    margin: 50px auto;
+    position: relative;
+    overflow: auto;
 }
 
-.register-card {
-    padding: 1.5rem;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+.doctor-register-card {
+    padding: 2rem;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     border-radius: 15px;
     background-color: rgba(111, 76, 176, 0.33);
     position: relative;
 }
 
-.register-title {
-    color: #4a148c;
-    position: absolute;
-    top: -32px;
-    left: 15px;
-    margin: 0;
-    font-size: 24px;
-}
-
-.form-label {
+.doctor-register-title {
     color: #3E2F9C;
+    font-size: 35px;
+    text-align: center;
+    position: relative;
+    top: 40px;
+    left: 30%;
+    border-radius: 8px;
 }
 
-.custom-input {
-    background-color: rgba(111, 76, 176, 0.00);
+.doctor-register-label {
+    color: #3E2F9C;
+    font-size: 16px;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.doctor-register-input {
+    background-color: transparent;
     border: 1px solid #4a148c;
     border-radius: 8px;
     color: white;
-    font-size: 12px;
+    font-size: 15px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 
-.register-button {
+.doctor-register-input::placeholder {
+    color: white;
+    font-size: 15px;
+}
+
+.doctor-register-select {
+    background-color: transparent;
+    border: 1px solid #4a148c;
+    border-radius: 8px;
+    color: #4a148c;
+    font-size: 15px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+option {
+    background-color: rgba(111, 76, 176, 0.33);
+    color: #4a148c;
+}
+
+option:hover {
+    background-color: #4a148c;
+    color: white;
+}
+
+.doctor-register-button {
     background-color: #4a148c;
     border-radius: 8px;
     padding: 10px;
-    margin-top: 10px;
-    font-size: 16px;
-    width: 35%;
+    font-size: 15px;
     color: white;
     border: none;
     cursor: pointer;
-}
-
-.register-link {
-    display: inline-block;
-    background-color: #4a148c;
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 12px;
-    width: 35%;
-    color: white;
-    text-align: center;
+    width: 33%;
     margin-top: 10px;
-    text-decoration: none;
 }
 
-.register-link:hover,
-.register-button:hover {
+.doctor-register-button:hover {
     opacity: 0.9;
 }

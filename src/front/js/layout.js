@@ -14,7 +14,6 @@ import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 import { Login } from "./component/login.jsx";
 import { Register } from "./component/register.jsx";
-import { DoctorRegister } from "./component/doctorregister.jsx";
 import { Modals } from "./component/editinformation.jsx";
 import { Profile } from "./pages/profile.jsx";
 
@@ -37,7 +36,6 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Register />} path="/register" />
-                        <Route element={<DoctorRegister />} path="/doctorregister" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Modals />} path="/editinformation" />
                         <Route element={<Profile />} path="/profile" />

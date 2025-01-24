@@ -2,85 +2,84 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-}
-
-
-.login-wrapper {
+    width: 100vw;
+    margin: 50px auto;
     position: relative;
-    max-width: 550px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    overflow: auto;
+    padding: 15px;
 }
-
-
-.login-title {
-    color: #4a148c;
-    position: absolute;
-    top: -32px;
-    left: 15px;
-    margin: 0;
-    font-size: 24px;
-}
-
 
 .login-card {
-    background-color: rgba(111, 76, 176, 0.33);
-    border-radius: 21px;
+    padding: 2rem;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
     width: 100%;
-    padding: 16px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    border-radius: 15px;
+    background-color: rgba(111, 76, 176, 0.33);
+    position: relative;
 }
 
-
-.form-group {
-    margin-bottom: 16px;
-}
-
-.input-field {
-    font-size: 12px;
-    padding: 8px;
-    background-color: rgba(111, 76, 176, 0.00);
-    border: 1px solid #3E2F9C;
-    border-radius: 8px;
-}
-
-
-.forgot-password {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 16px;
-}
-
-.forgot-link {
-    text-decoration: none;
+.login-title{
     color: #4a148c;
-    font-size: 12px;
+    font-size: 35px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: absolute;
+    top: 200px;
+    left: 35%;
+    padding: 5px 15px;
 }
 
+.form-label {
+    color: #3E2F9C;
+    font-size: 16px;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-control {
+    background-color: transparent;
+    border: 1px solid #4a148c;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+
+.form-control::placeholder {
+    color: white ;
+    font-size: 15px;
+}
 
 .login-button {
     background-color: #4a148c;
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 20px;
-    width: 35%;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
     color: white;
     border: none;
     cursor: pointer;
-    text-align: center;
+    width: 33%;
+    margin-top: 10px;
 }
 
-.register-text {
-    text-align: center;
-    margin-top: 16px;
-    font-size: 12px;
+.login-button:hover {
+    opacity: 0.9;
 }
 
 .register-link {
-    color: #dc3545;
+    color: red;
     text-decoration: none;
-    font-size: 12px;
 }
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+.forgot-password-link {
+    color:#3E2F9C ;
+}
+
