@@ -20,7 +20,7 @@ export const Login = () => {
                         fontSize: "24px"
                     }}
                 >
-                    Login
+                    Loging
                 </h3>
                 <div 
                     className="card p-3 shadow-sm" 
