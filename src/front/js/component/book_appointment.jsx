@@ -3,7 +3,7 @@ import "../../styles/BookAppointment.css";
 
 const daysInMonth = (month, year) => new Date(year, month, 0).getDate();
 
-const BookAppointment = () => {
+export const BookAppointment = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [appointments, setAppointments] = useState([]);
   const [selectedTime, setSelectedTime] = useState("09:00");
@@ -97,5 +97,5 @@ const BookAppointment = () => {
   );
 };
 
-export default BookAppointment;
+
 
