@@ -66,7 +66,7 @@ export const PatientProfile = () => {
                     
                 </div>
             </div>
-            <div className="col-sm-12 col-md-5 col-lg-5">
+            <div className="col-sm-12 col-md-5 col-lg-5 pt-5">
                 <div className="prof-list-container">
                     <h1 className="prof-sec-title">Appointment Status</h1>
                     <ul>

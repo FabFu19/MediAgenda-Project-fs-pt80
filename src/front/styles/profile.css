@@ -15,6 +15,7 @@ body {
 }
 .profile-container{
     padding: 15px;
+    padding-bottom: 30px;
     
 }
 .content-data-profile{
@@ -59,23 +60,6 @@ body {
 .dot-states .btn-light:hover{
     background-color: transparent;
     border: transparent;
-}
-.beautifier {
-    background-color: #2f4fff;
-    box-shadow: 0px 0px 4px black;
-    opacity: 1 !important;
-}
-.tooltip.bs-tooltip-right.tooltip-arrow::before {
-    border-right-color: #2f4fff !important;
-}
-.tooltip.bs-tooltip-left.tooltip-arrow::before {
-    border-left-color: #2f4fff !important;
-}
-.tooltip.bs-tooltip-bottom.tooltip-arrow::before {
-    border-bottom-color: #2f4fff !important;
-}
-.tooltip.bs-tooltip-top.tooltip-arrow::before {
-    border-top-color: #2f4fff !important;
 }
 
 .dot-states img {
@@ -131,7 +115,6 @@ body {
     padding: 27px 16px 27px 16px;
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
 }
 .prof-sec-title{
     font-family: "Alata", serif;

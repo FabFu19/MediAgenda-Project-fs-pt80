@@ -9,7 +9,7 @@ export const Profile = () => {
         <>
             <div className="profile-body">
                 <div className="profile-container container">
-                    <div className="row mb-5">
+                    <div className="row">
                         <PatientProfile />
                     </div>
                 </div>
