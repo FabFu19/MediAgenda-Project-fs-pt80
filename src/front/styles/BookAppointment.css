@@ -1,0 +1,115 @@
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar horizontalmente */
+  justify-content: center; /* Centrar verticalmente */
+  font-family: 'Arial', sans-serif; 
+  background-color: #f4f4f8;
+  padding: 30px; /* Incrementamos el padding */
+  border-radius: 10px; /* Redondeo mayor */
+  width: 500px; /* Hacemos el contenedor más ancho */
+  max-width: 90%; /* Para evitar que desborde en pantallas pequeñas */
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+}
+
+/* Estilo del calendario */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Mantiene 7 columnas */
+  gap: 15px; /* Espaciado mayor entre los días */
+  margin-bottom: 25px;
+}
+
+/* Días de la semana */
+.calendar-weekday {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #b4a4de; /* Color basado en la paleta */
+  text-transform: uppercase;
+  font-size: 16px; /* Texto más grande */
+}
+
+/* Días del mes */
+.calendar-day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px; /* Incrementamos el tamaño */
+  height: 50px;
+  background-color: #d9c7f0; /* Fondo de días no seleccionados */
+  color: #333;
+  border-radius: 8px; /* Bordes más redondeados */
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  font-size: 16px; /* Texto más grande */
+}
+
+.calendar-day:hover {
+  background-color: #b39de3; /* Hover */
+  transform: scale(1.1);
+}
+
+.calendar-day.selected {
+  background-color: #6c48b0; /* Fondo del día seleccionado */
+  color: white;
+  font-weight: bold;
+}
+
+/* Detalles de la cita */
+.appointment-details {
+  background-color: #6c48b0; /* Fondo */
+  color: white;
+  padding: 20px; /* Incrementamos el padding */
+  border-radius: 10px;
+  text-align: left;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-details p {
+  margin: 0;
+  font-size: 16px; /* Texto más grande */
+}
+
+/* Selector de hora */
+.time-selector {
+  margin-top: 15px;
+}
+
+.time-selector label {
+  font-weight: bold;
+}
+
+.time-selector input {
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 4px;
+  border: none;
+  font-size: 14px; /* Texto más grande */
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  .calendar-container {
+    width: 100%; /* Ajusta al ancho completo de la pantalla */
+    padding: 20px;
+  }
+
+  .calendar-day {
+    width: 40px; /* Tamaño más pequeño para pantallas pequeñas */
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .calendar-weekday {
+    font-size: 14px; /* Texto más pequeño */
+  }
+
+  .appointment-details {
+    font-size: 14px; /* Texto más pequeño */
+    padding: 15px;
+  }
+}
