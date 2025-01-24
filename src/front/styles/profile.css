@@ -131,7 +131,6 @@ body {
     padding: 27px 16px 27px 16px;
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
 }
 .prof-sec-title{
     font-family: "Alata", serif;
@@ -184,6 +183,7 @@ body {
     margin-left: 10px;
     margin-right: 10px;
 }
+
 
 @media (width <= 915px) {
     .content-data-profile{
