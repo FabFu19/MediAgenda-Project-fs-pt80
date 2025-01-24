@@ -15,6 +15,8 @@ import { Footer } from "./component/footer.jsx";
 import { Login } from "./component/login.jsx";
 import { Register } from "./component/register.jsx";
 import { DoctorRegister } from "./component/doctorregister.jsx";
+import { Modals } from "./component/editinformation.jsx";
+import { Profile } from "./pages/profile.jsx";
 
 
 //create your first component
@@ -37,7 +39,6 @@ const Layout = () => {
                         <Route element={<Register />} path="/register" />
                         <Route element={<DoctorRegister />} path="/doctorregister" />
                         <Route element={<Single />} path="/single/:theid" />
-                        <Route element={<LoginRegister />} path="/loginregister" />
                         <Route element={<Modals />} path="/editinformation" />
                         <Route element={<Profile />} path="/profile" />
                         {/* <Route element={<Register />} path="/register" /> */}
