@@ -14,7 +14,7 @@ import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 import { Profile } from "./pages/profile.jsx";
 import { LoginRegister } from "./component/loginregister.jsx";
-import { Modals } from "./component/editinformation.jsx";
+
 
 //create your first component
 const Layout = () => {
