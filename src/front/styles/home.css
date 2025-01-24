@@ -95,6 +95,12 @@
   height: auto;
 }
 
+.carousel-image {
+  width: 50%; /* Puedes ajustar este valor según tus necesidades */
+  height: auto; /* Mantiene la proporción de la imagen */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
 .btn-appointment,
 .btn-find-doctor {
   padding: 10px 20px;
