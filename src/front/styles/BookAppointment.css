@@ -1,82 +1,79 @@
 .calendar-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centrar horizontalmente */
-  justify-content: center; /* Centrar verticalmente */
-  font-family: 'Arial', sans-serif; 
-  background-color: #f4f4f8;
-  padding: 30px; /* Incrementamos el padding */
-  border-radius: 10px; /* Redondeo mayor */
-  width: 500px; /* Hacemos el contenedor más ancho */
-  max-width: 90%; /* Para evitar que desborde en pantallas pequeñas */
-  margin: 20px auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+  align-items: center;
+  font-family: 'gantari', sans-serif;
+  background-color: #e8e6f1;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo del calendario */
+.calendar-title {
+  font-size: 1.8rem;
+  color: #6c48b0;
+  margin-bottom: 1.5rem;
+}
+
 .calendar {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* Mantiene 7 columnas */
-  gap: 15px; /* Espaciado mayor entre los días */
-  margin-bottom: 25px;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-/* Días de la semana */
 .calendar-weekday {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   font-weight: bold;
-  color: #b4a4de; /* Color basado en la paleta */
-  text-transform: uppercase;
-  font-size: 16px; /* Texto más grande */
+  color: #6c48b0;
+  font-size: 1rem;
 }
 
-/* Días del mes */
 .calendar-day {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px; /* Incrementamos el tamaño */
-  height: 50px;
-  background-color: #d9c7f0; /* Fondo de días no seleccionados */
+  width: 3rem;
+  height: 3rem;
+  background-color: #dcd3f0;
+  border-radius: 0.5rem;
   color: #333;
-  border-radius: 8px; /* Bordes más redondeados */
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s;
-  font-size: 16px; /* Texto más grande */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 1rem;
 }
 
 .calendar-day:hover {
-  background-color: #b39de3; /* Hover */
+  background-color: #b9a6e3;
   transform: scale(1.1);
 }
 
 .calendar-day.selected {
-  background-color: #6c48b0; /* Fondo del día seleccionado */
+  background-color: #6c48b0;
   color: white;
   font-weight: bold;
 }
 
-/* Detalles de la cita */
 .appointment-details {
-  background-color: #6c48b0; /* Fondo */
+  background-color: #6c48b0;
   color: white;
-  padding: 20px; /* Incrementamos el padding */
-  border-radius: 10px;
-  text-align: left;
+  padding: 1rem;
+  border-radius: 0.5rem;
   width: 100%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  margin-bottom: 1rem;
 }
 
 .appointment-details p {
   margin: 0;
-  font-size: 16px; /* Texto más grande */
+  font-size: 1rem;
 }
 
-/* Selector de hora */
 .time-selector {
-  margin-top: 15px;
+  margin-top: 0.5rem;
 }
 
 .time-selector label {
@@ -84,32 +81,72 @@
 }
 
 .time-selector input {
-  margin-left: 10px;
-  padding: 5px;
-  border-radius: 4px;
+  margin-left: 0.5rem;
+  padding: 0.3rem;
+  border-radius: 0.25rem;
   border: none;
-  font-size: 14px; /* Texto más grande */
+  font-size: 1rem;
 }
 
-/* Responsividad */
-@media (max-width: 600px) {
-  .calendar-container {
-    width: 100%; /* Ajusta al ancho completo de la pantalla */
-    padding: 20px;
+.appointments-list {
+  width: 100%;
+  background-color: #f3f0fa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.appointment-item {
+  color: #6c48b0;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.schedule-button {
+  background-color: #6c48b0;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.schedule-button:hover {
+  background-color: #563392;
+}
+
+@media (max-width: 768px) {
+  .calendar {
+    gap: 0.4rem;
   }
 
   .calendar-day {
-    width: 40px; /* Tamaño más pequeño para pantallas pequeñas */
-    height: 40px;
-    font-size: 14px;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.9rem;
   }
 
-  .calendar-weekday {
-    font-size: 14px; /* Texto más pequeño */
+  .appointment-details,
+  .appointments-list {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-container {
+    padding: 1rem;
   }
 
-  .appointment-details {
-    font-size: 14px; /* Texto más pequeño */
-    padding: 15px;
+  .calendar-day {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.8rem;
+  }
+
+  .schedule-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
   }
 }

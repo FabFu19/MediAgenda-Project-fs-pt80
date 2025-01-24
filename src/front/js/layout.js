@@ -16,6 +16,7 @@ import { Login } from "./component/login.jsx";
 import { Register } from "./component/register.jsx";
 import { DoctorRegister } from "./component/doctorregister.jsx";
 
+
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -36,6 +37,10 @@ const Layout = () => {
                         <Route element={<Register />} path="/register" />
                         <Route element={<DoctorRegister />} path="/doctorregister" />
                         <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<LoginRegister />} path="/loginregister" />
+                        <Route element={<Modals />} path="/editinformation" />
+                        <Route element={<Profile />} path="/profile" />
+                        {/* <Route element={<Register />} path="/register" /> */}
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
