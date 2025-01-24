@@ -45,6 +45,7 @@ body {
 .prof-edit-icon{
     font-size: 21px;
     color: #ffff;
+    cursor: pointer;
 }
 .dot-states{
     display: flex;
@@ -168,6 +169,16 @@ body {
     margin-right: 10px;
 }
 
+/* Doctor-profile css */
+.doctor-profile .esp-pic {
+    height: 207px;
+    width: 190px;
+    margin-top: 4px;
+}
+.doctor-profile .choose-speci-box {
+    padding: 10px 15px 0 15px;
+}
+/* Responsive */ 
 
 @media (width <= 915px) {
     .content-data-profile{

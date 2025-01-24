@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 export const Modals = () => {
     const [formData, setFormData] = useState({
         firstName: "",
-        lastName: "",   
+        lastName: "",
         phoneNumber: "",
         email: "",
         address: "",
@@ -72,97 +72,97 @@ export const Modals = () => {
             <div className="p-4 shadow" style={{ backgroundColor: "#CDC7ED", width: "400px", borderRadius: "15px" }}>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
-                    <label className="form-label" style={{color: "#3E2F9C" }}>First Name:</label>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            name="firstName" 
-                              value={formData.firstName} 
-                            style={{ backgroundColor: "#CDC7ED", border: "1px solid #3E2F9C", borderRadius: "8px"  }}
-                            onChange={handleChange} 
-                            required 
+                        <label className="form-label" style={{ color: "#3E2F9C" }}>First Name:</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="firstName"
+                            value={formData.firstName}
+                            style={{ backgroundColor: "#CDC7ED", border: "1px solid #3E2F9C", borderRadius: "8px" }}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-3">
-                    <label className="form-label" style={{color: "#3E2F9C" }}>Last Name:</label>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            name="lastName" 
-                            value={formData.lastName} 
+                        <label className="form-label" style={{ color: "#3E2F9C" }}>Last Name:</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="lastName"
+                            value={formData.lastName}
                             style={{ backgroundColor: "#CDC7ED", border: "1px solid #3E2F9C", borderRadius: "8px" }}
-                            onChange={handleChange} 
-                            required 
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-3">
-                        <label className="form-label" style={{color: "#3E2F9C" }}>Phone Number:</label>
-                        <input 
-                            type="tel" 
-                            className="form-control" 
-                            name="phoneNumber" 
-                            value={formData.phoneNumber} 
+                        <label className="form-label" style={{ color: "#3E2F9C" }}>Phone Number:</label>
+                        <input
+                            type="tel"
+                            className="form-control"
+                            name="phoneNumber"
+                            value={formData.phoneNumber}
                             style={{ backgroundColor: "#CDC7ED", border: "1px solid #3E2F9C", borderRadius: "8px" }}
-                            onChange={handleChange} 
-                            required 
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-3">
-                    <label className="form-label" style={{color: "#3E2F9C" }}>Email:</label>
-                        <input 
-                            type="email" 
-                            className="form-control" 
-                            name="email" 
-                            value={formData.email} 
+                        <label className="form-label" style={{ color: "#3E2F9C" }}>Email:</label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            name="email"
+                            value={formData.email}
                             style={{ backgroundColor: "#CDC7ED", border: "1px solid #3E2F9C", borderRadius: "8px" }}
-                            onChange={handleChange} 
-                            required 
+                            onChange={handleChange}
+                            required
                         />
                     </div>
 
                     {userType === "doctor" ? (
                         <>
                             <div className="mb-3">
-                            <label className="form-label" style={{color: "#3E2F9C" }}>Office Address:</label>
-                                <input 
-                                    type="text" 
-                                    className="form-control" 
-                                    name="medicalLicense" 
-                                    value={formData.officeAddress} 
+                                <label className="form-label" style={{ color: "#3E2F9C" }}>Office Address:</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="medicalLicense"
+                                    value={formData.officeAddress}
                                     style={{ backgroundColor: "#CDC7ED", border: "1px solid #3E2F9C", borderRadius: "8px" }}
-                                    onChange={handleChange} 
-                                    required 
+                                    onChange={handleChange}
+                                    required
                                 />
                             </div>
                         </>
                     ) : (
                         <>
                             <div className="mb-3">
-                            <label className="form-label" style={{color: "#3E2F9C" }}>Address (Optional):</label>
-                                <input 
-                                    type="text" 
-                                    className="form-control" 
-                                    name="address" 
-                                    value={formData.address} 
+                                <label className="form-label" style={{ color: "#3E2F9C" }}>Address (Optional):</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="address"
+                                    value={formData.address}
                                     style={{ backgroundColor: "#CDC7ED", border: "1px solid #3E2F9C", borderRadius: "8px" }}
-                                    onChange={handleChange} 
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="mb-3">
-                            <label className="form-label" style={{color: "#3E2F9C" }}>Social Security Number (Optional):</label>
-                            <input 
-                                 type="text" 
-                                 className="form-control" 
-                                 name="socialSecurityNumber" 
-                                 value={formData.socialSecurityNumber} 
-                                 style={{ backgroundColor: "#CDC7ED", border: "1px solid #3E2F9C", borderRadius: "8px" }}
-                                 onChange={handleChange} 
-                                 />
+                                <label className="form-label" style={{ color: "#3E2F9C" }}>Social Security Number (Optional):</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="socialSecurityNumber"
+                                    value={formData.socialSecurityNumber}
+                                    style={{ backgroundColor: "#CDC7ED", border: "1px solid #3E2F9C", borderRadius: "8px" }}
+                                    onChange={handleChange}
+                                />
                             </div>
                         </>
                     )}
                     <div className="d-flex justify-content-center">
-                    <button type="submit" className="btn btn-primary w-25 fw-bold">Save</button>
+                        <button type="submit" className="btn btn-primary w-25 fw-bold">Save</button>
                     </div>
                 </form>
             </div>

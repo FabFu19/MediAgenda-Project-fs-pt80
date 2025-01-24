@@ -17,6 +17,7 @@ import { Register } from "./component/register.jsx";
 import { DoctorRegister } from "./component/doctorregister.jsx";
 import { Modals } from "./component/editinformation.jsx";
 import { Profile } from "./pages/profile.jsx";
+import { Modals } from "./component/editinformation.jsx";
 
 
 //create your first component
