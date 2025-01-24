@@ -14,7 +14,7 @@ import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 import { Profile } from "./pages/profile.jsx";
 import { LoginRegister } from "./component/loginregister.jsx";
-import { book_appointment } from "./component/book_appointment.jsx";
+
 
 //create your first component
 const Layout = () => {
@@ -33,6 +33,7 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<LoginRegister />} path="/loginregister" />
+                        <Route element={<Modals />} path="/editinformation" />
                         <Route element={<Profile />} path="/profile" />
                         {/* <Route element={<Register />} path="/register" /> */}
                         <Route element={<h1>Not found!</h1>} />
