@@ -4,6 +4,8 @@ import image15 from "../../img/image 15.png";
 import image16 from "../../img/image 16.png";
 import image17 from "../../img/image 17.png";
 import "../../styles/home.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 export const Home = () => {
   return (
@@ -34,48 +36,55 @@ export const Home = () => {
         </p>
       </section>
 
-      {/* Carrusel de Profesionales */}
-      <section className="professional-slide">
-        <h2>Our Professionals</h2>
-        <div id="carouselExampleDark" className="carousel carousel-dark slide" data-bs-ride="carousel">
-          <div className="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div>
-          <div className="carousel-inner">
-            <div className="carousel-item active" data-bs-interval="10000">
-              <img src={image15} className="d-block w-100 carousel-image" alt="Doctor 1" />
-              <div className="carousel-caption d-none d-md-block">
-                <h5>Dr. Jane Doe</h5>
-                <p>Some representative placeholder content for the first slide.</p>
-              </div>
-            </div>
-            <div className="carousel-item" data-bs-interval="2000">
-              <img src={image16} className="d-block w-100 carousel-image" alt="Doctor 2" />
-              <div className="carousel-caption d-none d-md-block">
-                <h5>Dr. John Smith</h5>
-                <p>Some representative placeholder content for the second slide.</p>
-              </div>
-            </div>
-            <div className="carousel-item">
-              <img src={image17} className="d-block w-100 carousel-image" alt="Doctor 3" />
-              <div className="carousel-caption d-none d-md-block">
-                <h5>Dr. Emily Brown</h5>
-                <p>Some representative placeholder content for the third slide.</p>
-              </div>
-            </div>
-          </div>
-          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Next</span>
-          </button>
+{/* Carrusel de Profesionales */}
+<section className="professional-slide">
+  <div id="professionalsCarousel" className="carousel slide" data-bs-ride="carousel">
+    <div className="carousel-inner">
+      {/* Primer Item */}
+      <div className="carousel-item active">
+        <div className="image-container">
+          <img src={image15} className="d-block" alt="Doctor 1" />
         </div>
-      </section>
+        <div className="carousel-caption">
+          <h5>Dr. Jane Doe</h5>
+          <p>Cardiology Specialist</p>
+        </div>
+      </div>
+      
+      {/* Segundo Item */}
+      <div className="carousel-item">
+        <div className="image-container">
+          <img src={image16} className="d-block" alt="Doctor 2" />
+        </div>
+        <div className="carousel-caption">
+          <h5>Dr. John Smith</h5>
+          <p>Pediatric Expert</p>
+        </div>
+      </div>
+
+      {/* Tercer Item */}
+      <div className="carousel-item">
+        <div className="image-container">
+          <img src={image17} className="d-block" alt="Doctor 3" />
+        </div>
+        <div className="carousel-caption">
+          <h5>Dr. Emily Brown</h5>
+          <p>Dermatology Specialist</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Controles */}
+    <button className="carousel-control-prev" type="button" data-bs-target="#professionalsCarousel" data-bs-slide="prev">
+      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span className="visually-hidden">Previous</span>
+    </button>
+    <button className="carousel-control-next" type="button" data-bs-target="#professionalsCarousel" data-bs-slide="next">
+      <span className="carousel-control-next-icon" aria-hidden="true"></span>
+      <span className="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
 
       {/* Sección "Find Your Doctor" */}
       <section className="find-doctor">
