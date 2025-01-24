@@ -7,8 +7,6 @@ import ReactDOM from "react-dom";
 import "../styles/index.css";
 import "../styles/navbar.css";
 import "../styles/BookAppointment.css";
-import "../styles/profile.css";
-
 
 //import your own components
 import Layout from "./layout";

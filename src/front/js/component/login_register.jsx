@@ -1,10 +1,11 @@
 import React from "react";
 
 
-export const Doctor = () => {
+
+export const LoginRegister = () => {
     return(
         <>
         
         </>
-    );
+    )
 }
