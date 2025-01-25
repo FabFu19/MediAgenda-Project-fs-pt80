@@ -82,7 +82,7 @@ export const Register = () => {
                             value={profileType}
                             onChange={handleProfileTypeChange}
                         >
-                            <option value="">Select Profile Type</option>
+                            <option value="">Profile Type</option>
                             <option value="Patient">Patient</option>
                             <option value="Doctor">Doctor</option>
                         </select>
