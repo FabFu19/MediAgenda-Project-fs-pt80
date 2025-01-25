@@ -37,21 +37,16 @@ export const Doctor = () => {
                             <span className="fa-regular fa-pen-to-square prof-edit-icon"></span>
                         </div>
                     </div>
-                    <div className="dot-states mascara">
-                        
-                        <span className="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Available">
-                            <img src={circle_1} alt="circle1"/>
+                    <div className="dot-states">
+                        <span data-bs-toggle="tooltip" data-bs-custom-class="tool-status" data-bs-placement="bottom" data-bs-title="Available">
+                            <img src={circle_1} alt="circle1" />
                         </span>
-                        {/* <div className="tooltip bs-tooltip-top" role="tooltip">
-                            <div className="tooltip-arrow"></div>
-                            <div className="tooltip-inner">
-                                Some tooltip text!
-                            </div>
-                        </div> */}
-                        {/* <div  className="btn btn-light red-tooltip" data-bs-toggle="tooltip" customClass="tooltip-prof" data-bs-placement="left" title="Available"></div> */}
-                        {/* <div className="status-img"><p>Available</p></div> */}
-                        <img className="status-img" src={circle_2} alt="circle2" data-status="Cancelled" />
-                        <img className="status-img" src={circle_3} alt="circle3" data-status="Available" />
+                        <span data-bs-toggle="tooltip" data-bs-custom-class="tool-status" data-bs-placement="bottom" data-bs-title="Cancelled">
+                            <img src={circle_2}  alt="circle1" />
+                        </span>
+                        <span data-bs-toggle="tooltip" data-bs-custom-class="tool-status" data-bs-placement="bottom" data-bs-title="Pending">
+                            <img src={circle_3} alt="circle1" />
+                        </span>
                     </div>
                 </div>
                 <div className="d-flex content-medical-options">
