@@ -1,12 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import logo from "../../img/logo-medi-2.png";
 import { Link, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
-	const [isOpen, setIsOpen] = useState(false)
-	const location = useLocation(); 
+    const [isOpen, setIsOpen] = useState(false)
+    const location = useLocation();
 
-    
+
     const isProfilePage = location.pathname === "/profile";
     const ProfileNavbar = () => (
         <nav className="navbar navbar-expand-lg navbar-light pt-0 pb-0 navbar-profile ">
@@ -37,7 +37,7 @@ export const Navbar = () => {
         </nav>
     );
 
- 
+
     const GeneralNavbar = () => (
         <nav className="navbar navbar-expand-lg navbar-light pt-0 pb-0 navbar-principal-classes h-auto">
             <div className="d-flex w-100">
