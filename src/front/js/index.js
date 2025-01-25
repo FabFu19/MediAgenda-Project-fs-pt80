@@ -8,6 +8,8 @@ import "../styles/index.css";
 import "../styles/navbar.css";
 import "../styles/BookAppointment.css";
 import "../styles/profile.css";
+import "../styles/login.css";
+import "../styles/register.css";
 
 
 //import your own components
