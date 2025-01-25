@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import circle_1 from "../../img/Circle.png";
 import circle_2 from "../../img/Circle_2.png";
 import circle_3 from "../../img/Circle_3.png";
@@ -8,8 +8,14 @@ import { Link } from "react-router-dom";
 
 
 export const PatientProfile = () => {
+    useEffect(() => {
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        tooltipTriggerList.forEach(tooltipTriggerEl => {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    }, []); 
     
-    return(
+    return (
         <>
             <div className="col-sm-12 col-md-7 col-lg-7">
                 <h1 className="prof-pinci-title">Profile</h1>
@@ -37,26 +43,22 @@ export const PatientProfile = () => {
                             <span className="fa-regular fa-pen-to-square prof-edit-icon"></span>
                         </div>
                     </div>
-                    <div className="dot-states mascara">
-                        
-                        <span className="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Available">
-                            <img src={circle_1} alt="circle1"/>
+                    <div className="dot-states">
+
+                        <span data-bs-toggle="tooltip" data-bs-custom-class="tool-status" data-bs-placement="bottom" data-bs-title="Available">
+                            <img src={circle_1} alt="circle1" />
                         </span>
-                        {/* <div className="tooltip bs-tooltip-top" role="tooltip">
-                            <div className="tooltip-arrow"></div>
-                            <div className="tooltip-inner">
-                                Some tooltip text!
-                            </div>
-                        </div> */}
-                        {/* <div  className="btn btn-light red-tooltip" data-bs-toggle="tooltip" customClass="tooltip-prof" data-bs-placement="left" title="Available"></div> */}
-                        {/* <div className="status-img"><p>Available</p></div> */}
-                        <img className="status-img" src={circle_2} alt="circle2" data-status="Cancelled" />
-                        <img className="status-img" src={circle_3} alt="circle3" data-status="Available" />
+                        <span data-bs-toggle="tooltip" data-bs-custom-class="tool-status" data-bs-placement="bottom" data-bs-title="Cancelled">
+                            <img src={circle_2}  alt="circle1" />
+                        </span>
+                        <span data-bs-toggle="tooltip" data-bs-custom-class="tool-status" data-bs-placement="bottom" data-bs-title="Pending">
+                            <img src={circle_3} alt="circle1" />
+                        </span>
                     </div>
                 </div>
                 <div className="d-flex content-medical-options">
                     <Link to="/" className="d-flex choose-speci-box text-decoration-none">
-                        <img src={doctor_1} alt="especialista" className="esp-pic"/>
+                        <img src={doctor_1} alt="especialista" className="esp-pic" />
                         <p className="select-speciality">Choose a Speciality</p>
                     </Link>
                     <Link to="/" className="comming-s-box text-decoration-none">
@@ -64,57 +66,59 @@ export const PatientProfile = () => {
                         <h3 className="comming-text">History is</h3>
                         <h3 className="comming-text">Comming soon</h3>
                     </Link>
-                    
-                    
                 </div>
             </div>
             <div className="col-sm-12 col-md-5 col-lg-5 pt-5">
                 <div className="prof-list-container">
                     <h1 className="prof-sec-title">Appointment Status</h1>
-                    <ul>
-                        <li className="content-appoint-data">
-                            <div className="data-text-appoint">
-                                <p className="name-appoint">Dr. Orangel Hernandez</p>
-                                <p className="date-appoint">February 24 at 09:00</p>
-                            </div>
-                            <div className="content-appoint-status">
-                                <img src={circle_1}  alt="circle1" className="img-status"/>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li className="content-appoint-data">
-                            <div className="data-text-appoint">
-                                <p className="name-appoint">Dr. Orangel Hernandez</p>
-                                <p className="date-appoint">February 24 at 09:00</p>
-                            </div>
-                            <div className="content-appoint-status">
-                                <img src={circle_1}  alt="circle1" className="img-status"/>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li className="content-appoint-data">
-                            <div className="data-text-appoint">
-                                <p className="name-appoint">Dr. Orangel Hernandez</p>
-                                <p className="date-appoint">February 24 at 09:00</p>
-                            </div>
-                            <div className="content-appoint-status">
-                                <img src={circle_1}  alt="circle1" className="img-status"/>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li className="content-appoint-data">
-                            <div className="data-text-appoint">
-                                <p className="name-appoint">Dr. Orangel Hernandez</p>
-                                <p className="date-appoint">February 24 at 09:00</p>
-                            </div>
-                            <div className="content-appoint-status">
-                                <img src={circle_1}  alt="circle1" className="img-status"/>
-                            </div>
-                        </li>
-                    </ul>
+                    <div className="content-scroll-list">
+                        <div className="list-scrolled">
+                            <ul>
+                                <li className="content-appoint-data">
+                                    <div className="data-text-appoint">
+                                        <p className="name-appoint">Dr. Orangel Hernandez</p>
+                                        <p className="date-appoint">February 24 at 09:00</p>
+                                    </div>
+                                    <div className="content-appoint-status">
+                                        <img src={circle_1} alt="circle1" className="img-status" />
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li className="content-appoint-data">
+                                    <div className="data-text-appoint">
+                                        <p className="name-appoint">Dr. Orangel Hernandez</p>
+                                        <p className="date-appoint">February 24 at 09:00</p>
+                                    </div>
+                                    <div className="content-appoint-status">
+                                        <img src={circle_1} alt="circle1" className="img-status" />
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li className="content-appoint-data">
+                                    <div className="data-text-appoint">
+                                        <p className="name-appoint">Dr. Orangel Hernandez</p>
+                                        <p className="date-appoint">February 24 at 09:00</p>
+                                    </div>
+                                    <div className="content-appoint-status">
+                                        <img src={circle_1} alt="circle1" className="img-status" />
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li className="content-appoint-data">
+                                    <div className="data-text-appoint">
+                                        <p className="name-appoint">Dr. Orangel Hernandez</p>
+                                        <p className="date-appoint">February 24 at 09:00</p>
+                                    </div>
+                                    <div className="content-appoint-status">
+                                        <img src={circle_1} alt="circle1" className="img-status" />
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
