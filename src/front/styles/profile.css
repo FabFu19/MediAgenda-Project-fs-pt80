@@ -69,6 +69,12 @@ body {
     cursor: pointer;
 }
 
+.tool-status{
+    --bs-tooltip-bg: rgba(255, 255, 255, 0.7);
+    --bs-tooltip-color: #3E2F9C;
+    --bs-font-sans-serif: "Gantari";
+}
+
 
 .choose-speci-box{
     width: 495px;
