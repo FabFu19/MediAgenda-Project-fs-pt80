@@ -7,6 +7,7 @@ export const Profile = () => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
+        
         if (!store.user) {
             actions.getProfile();
         }
