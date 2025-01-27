@@ -1,6 +1,6 @@
 import React from "react";
 import { PatientProfile } from "../component/profile.jsx";
-import { NavbarProfile } from "../component/navbar-profile.jsx";
+import { Doctor } from "../component/doctor_profile.jsx";
 
 
 
@@ -11,7 +11,8 @@ export const Profile = () => {
             <div className="profile-body">
                 <div className="profile-container container">
                     <div className="row">
-                        <PatientProfile />
+                        <PatientProfile /> 
+                        <Doctor />
                     </div>
                 </div>
             </div>

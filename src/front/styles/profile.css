@@ -14,14 +14,13 @@ body {
     margin-top: 20px;
 }
 .profile-container{
-    padding: 15px;
-    padding-bottom: 30px;
+    padding: 30px 15px 40px 15px;
     
 }
 .content-data-profile{
     width: 80%;
     background-color: rgba(111, 76, 176, 0.45);
-    height: 350px;
+    height: 100%;
     border-radius: 21px;
     padding: 30px 19px 25px 19px;
     display: flex;
@@ -45,6 +44,7 @@ body {
 .prof-edit-icon{
     font-size: 21px;
     color: #ffff;
+    cursor: pointer;
 }
 .dot-states{
     display: flex;
@@ -66,6 +66,12 @@ body {
     width: 25px;
     height: 25px;
     cursor: pointer;
+}
+
+.tool-status{
+    --bs-tooltip-bg: rgba(255, 255, 255, 0.7);
+    --bs-tooltip-color: #3E2F9C;
+    --bs-font-sans-serif: "Gantari";
 }
 
 
@@ -123,6 +129,10 @@ body {
     align-self: center;
     margin-bottom: 14px;
 }
+
+.content-scroll-list{
+    height: 395px;
+}
 .prof-list-container > ul{
     padding-left: 0;
 }
@@ -168,6 +178,16 @@ body {
     margin-right: 10px;
 }
 
+/* Doctor-profile css */
+.doctor-profile .esp-pic {
+    height: 207px;
+    width: 190px;
+    margin-top: 4px;
+}
+.doctor-profile .choose-speci-box {
+    padding: 10px 15px 0 15px;
+}
+/* Responsive */ 
 
 @media (width <= 915px) {
     .content-data-profile{

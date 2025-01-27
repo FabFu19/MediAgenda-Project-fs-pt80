@@ -96,7 +96,44 @@ def login():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
 
+@api.route('/profile', methods=['GET'])
+@jwt_required()
+def get_profile():
+    try:
+        current_user = get_jwt_identity()
+        user = Users.query.get(current_user)
+
+        if not user:
+            return jsonify({"error": "Usuario no encontrado"}), 404
+
+        
+        if user.paciente:
+          
+            patient_profile = Pacientes.query.filter_by(user_id=user.id).first()
+            if not patient_profile:
+                return jsonify({"error": "Perfil de paciente no encontrado"}), 404
+
+            return jsonify({
+                "role": "paciente",
+                "user": user.serialize(),
+                "profile": patient_profile.serialize()
+            }), 200
+        else:
+            #
+            specialist_profile = Especialistas.query.filter_by(user_id=user.id).first()
+            if not specialist_profile:
+                return jsonify({"error": "Perfil de especialista no encontrado"}), 404
+
+            return jsonify({
+                "role": "especialista",
+                "user": user.serialize(),
+                "profile": specialist_profile.serialize()
+            }), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @api.route('/disponibilidad', methods=['POST'])
 @jwt_required()

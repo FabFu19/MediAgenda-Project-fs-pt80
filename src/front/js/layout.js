@@ -12,9 +12,12 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
-import { Profile } from "./pages/profile.jsx";
-import { LoginRegister } from "./component/loginregister.jsx";
+import { Login } from "./component/login.jsx";
+import { Register } from "./component/register.jsx";
 import { Modals } from "./component/editinformation.jsx";
+import { Profile } from "./pages/profile.jsx";
+import { BookAppointment } from "./component/book_appointment.jsx";
+
 
 //create your first component
 const Layout = () => {
@@ -32,9 +35,12 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
-                        <Route element={<LoginRegister />} path="/loginregister" />
+                        <Route element={<Login />} path="/login" />
+                        <Route element={<Register />} path="/register" />
+                        <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Modals />} path="/editinformation" />
                         <Route element={<Profile />} path="/profile" />
+                        <Route element={<BookAppointment />} path="/book_appointment" /> 
                         {/* <Route element={<Register />} path="/register" /> */}
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
