@@ -92,7 +92,7 @@ def login():
         # Crear token con el ID y el rol del usuario
         access_token = create_access_token(identity=str(user.id))
 
-        return jsonify({"msg": "Inicio de sesión exitoso", "token": access_token}), 200
+        return jsonify({"msg": "Inicio de sesion exitoso", "token": access_token, "user": user.serialize()}), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
