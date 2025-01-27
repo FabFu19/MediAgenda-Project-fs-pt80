@@ -69,7 +69,7 @@ export const Doctor = () => {
                     <ul>
                         <li className="content-appoint-data">
                             <div className="data-text-appoint">
-                                <p className="name-appoint">Dr. Orangel Hernandez</p>
+                                <p className="name-appoint">Harry Postres</p>
                                 <p className="date-appoint">February 24 at 09:00</p>
                             </div>
                             <div className="content-appoint-status">
@@ -80,7 +80,7 @@ export const Doctor = () => {
                     <ul>
                         <li className="content-appoint-data">
                             <div className="data-text-appoint">
-                                <p className="name-appoint">Dr. Orangel Hernandez</p>
+                                <p className="name-appoint">Harry Postres</p>
                                 <p className="date-appoint">February 24 at 09:00</p>
                             </div>
                             <div className="content-appoint-status">
@@ -91,7 +91,7 @@ export const Doctor = () => {
                     <ul>
                         <li className="content-appoint-data">
                             <div className="data-text-appoint">
-                                <p className="name-appoint">Dr. Orangel Hernandez</p>
+                                <p className="name-appoint">Harry Postres</p>
                                 <p className="date-appoint">February 24 at 09:00</p>
                             </div>
                             <div className="content-appoint-status">
@@ -102,7 +102,7 @@ export const Doctor = () => {
                     <ul>
                         <li className="content-appoint-data">
                             <div className="data-text-appoint">
-                                <p className="name-appoint">Dr. Orangel Hernandez</p>
+                                <p className="name-appoint">Harry Postres</p>
                                 <p className="date-appoint">February 24 at 09:00</p>
                             </div>
                             <div className="content-appoint-status">
