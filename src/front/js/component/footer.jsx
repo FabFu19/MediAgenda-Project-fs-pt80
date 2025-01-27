@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo_footer from "../../img/logo_footer.png";
 
 export const Footer = () => (
   <footer className="footer">
@@ -7,7 +8,7 @@ export const Footer = () => (
       <div className="container d-flex">
         <img
           className="footer-logo"
-          src="https://github.com/FabFu19/MediAgenda-Project-fs-pt80/raw/799116be9c56823c46f063306d29671d34a2fd5b/src/front/img/image%205.png"
+          src={logo_footer}
           alt="Logo"
         />
       </div>
