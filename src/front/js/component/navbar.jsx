@@ -64,14 +64,14 @@ export const Navbar = () => {
                             </Link>
                         </li>
                         <div className="nav-btn-container-responsive">
-                            <Link to="/" className="btn custom-btn special_margin" type="submit">
+                            <Link to="/register" className="btn custom-btn special_margin" type="submit">
                                 <p>Register</p>
                             </Link>
                         </div>
                     </ul>
                 </div>
                 <li className="nav-btn-container">
-                    <Link to="/" className="btn custom-btn special_margin" type="submit">
+                    <Link to="/register" className="btn custom-btn special_margin" type="submit">
                         <p>Register</p>
                     </Link>
                 </li>
@@ -108,14 +108,14 @@ export const Navbar = () => {
                             </Link>
                         </li>
                         <div className="nav-btn-container-responsive">
-                            <Link to="/" className="btn custom-btn special_margin" type="submit">
+                            <Link to="/login" className="btn custom-btn special_margin" type="submit">
                                 <p>Login</p>
                             </Link>
                         </div>
                     </ul>
                 </div>
                 <li className="nav-btn-container">
-                    <Link to="/" className="btn custom-btn special_margin" type="submit">
+                    <Link to="/login" className="btn custom-btn special_margin" type="submit">
                         <p>Login</p>
                     </Link>
                 </li>
@@ -177,10 +177,10 @@ export const Navbar = () => {
                             </Link>
                         </li>
                         <div className="nav-btn-container-responsive">
-                            <Link to="/" className="btn custom-btn special_margin" type="submit">
+                            <Link to="/login" className="btn custom-btn special_margin" type="submit">
                                 <p>Login</p>
                             </Link>
-                            <Link to="/" className="btn custom-btn special_margin" type="submit">
+                            <Link to="/register" className="btn custom-btn special_margin" type="submit">
                                 <p>Register</p>
                             </Link>
                         </div>
