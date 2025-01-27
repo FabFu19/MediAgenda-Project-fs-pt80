@@ -11,7 +11,6 @@ import { Modals } from "./editinformation.jsx";
 export const PatientProfile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [profileData, setProfileData] = useState(() => {
-       
         const storedData = localStorage.getItem("profileData");
         return storedData
             ? JSON.parse(storedData)
@@ -20,6 +19,8 @@ export const PatientProfile = () => {
                   lastName: "El Bueno",
                   phoneNumber: "6458889999",
                   email: "pepebue@geeks.com",
+                  address: "",
+                  securityNumber: ""
               };
     });
 
@@ -41,7 +42,7 @@ export const PatientProfile = () => {
                 <div className="d-flex mb-4">
                     <div className="content-data-profile">
                         <div className="container-info-profile">
-                            <div>
+                        <div>
                                 <p className="require-data-title">Name:</p>
                                 <p className="require-data-info">{profileData.firstName}</p>
                             </div>
@@ -57,6 +58,19 @@ export const PatientProfile = () => {
                                 <p className="require-data-title">Email:</p>
                                 <p className="require-data-info">{profileData.email}</p>
                             </div>
+                            {profileData.address && (
+                                <div>
+                                    <p className="require-data-title">Address:</p>
+                                    <p className="require-data-info">{profileData.address}</p>
+                                </div>
+                            )}
+                           
+                            {profileData.securityNumber && (
+                                <div>
+                                    <p className="require-data-title">Social Security Number: *</p>
+                                    <p className="require-data-info">{profileData.securityNumber}</p>
+                                </div>
+                            )}
                         </div>
                         <div>
                             <span
