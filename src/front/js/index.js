@@ -10,6 +10,9 @@ import "../styles/BookAppointment.css";
 import "../styles/profile.css";
 import "../styles/login.css";
 import "../styles/register.css";
+import "../styles/editinformation.css";
+
+
 
 
 //import your own components
