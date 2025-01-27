@@ -17,7 +17,7 @@ import { Register } from "./component/register.jsx";
 import { Modals } from "./component/editinformation.jsx";
 import { Profile } from "./pages/profile.jsx";
 import { BookAppointment } from "./component/book_appointment.jsx";
-import { Modals } from "./component/editinformation.jsx";
+import { Calendar } from "./component/calendar.jsx";
 
 
 //create your first component
