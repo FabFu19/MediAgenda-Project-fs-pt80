@@ -12,7 +12,7 @@ export const Profile = () => {
                 <div className="profile-container container">
                     <div className="row">
                         <PatientProfile /> 
-                        <Doctor></Doctor>
+                        <Doctor />
                     </div>
                 </div>
             </div>

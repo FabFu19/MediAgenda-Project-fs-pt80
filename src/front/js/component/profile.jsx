@@ -1,20 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import circle_1 from "../../img/Circle.png";
 import circle_2 from "../../img/Circle_2.png";
 import circle_3 from "../../img/Circle_3.png";
 import doctor_1 from "../../img/doctor5.png";
 import { Link } from "react-router-dom";
+import { Modals } from "./editinformation.jsx";
 
 
 
 export const PatientProfile = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [profileData, setProfileData] = useState(() => {
+        const storedData = localStorage.getItem("profileData");
+        return storedData
+            ? JSON.parse(storedData)
+            : {
+                  firstName: "Pepe",
+                  lastName: "El Bueno",
+                  phoneNumber: "6458889999",
+                  email: "pepebue@geeks.com",
+                  address: "",
+                  securityNumber: ""
+              };
+    });
+
+    const updateProfileData = (data) => {
+        setProfileData(data);
+        localStorage.setItem("profileData", JSON.stringify(data));
+    };
     useEffect(() => {
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
         tooltipTriggerList.forEach(tooltipTriggerEl => {
             new bootstrap.Tooltip(tooltipTriggerEl);
         });
     }, []); 
-    
+
     return (
         <>
             <div className="col-sm-12 col-md-7 col-lg-7">
@@ -22,25 +42,41 @@ export const PatientProfile = () => {
                 <div className="d-flex mb-4">
                     <div className="content-data-profile">
                         <div className="container-info-profile">
-                            <div>
+                        <div>
                                 <p className="require-data-title">Name:</p>
-                                <p className="require-data-info">Pepe</p>
+                                <p className="require-data-info">{profileData.firstName}</p>
                             </div>
                             <div>
                                 <p className="require-data-title">Last Name:</p>
-                                <p className="require-data-info">El Bueno</p>
+                                <p className="require-data-info">{profileData.lastName}</p>
                             </div>
                             <div>
                                 <p className="require-data-title">Phone Number:</p>
-                                <p className="require-data-info">6458889999</p>
+                                <p className="require-data-info">{profileData.phoneNumber}</p>
                             </div>
                             <div>
                                 <p className="require-data-title">Email:</p>
-                                <p className="require-data-info">pepebue@geeks.com</p>
+                                <p className="require-data-info">{profileData.email}</p>
                             </div>
+                            {profileData.address && (
+                                <div>
+                                    <p className="require-data-title">Address:</p>
+                                    <p className="require-data-info">{profileData.address}</p>
+                                </div>
+                            )}
+                           
+                            {profileData.securityNumber && (
+                                <div>
+                                    <p className="require-data-title">Social Security Number: *</p>
+                                    <p className="require-data-info">{profileData.securityNumber}</p>
+                                </div>
+                            )}
                         </div>
                         <div>
-                            <span className="fa-regular fa-pen-to-square prof-edit-icon"></span>
+                            <span
+                                className="fa-regular fa-pen-to-square prof-edit-icon"
+                                onClick={() => setIsModalOpen(true)}
+                            ></span>
                         </div>
                     </div>
                     <div className="dot-states">
@@ -64,7 +100,7 @@ export const PatientProfile = () => {
                     <Link to="/" className="comming-s-box text-decoration-none">
                         <h3 className="comming-text">Medical</h3>
                         <h3 className="comming-text">History is</h3>
-                        <h3 className="comming-text">Comming soon</h3>
+                        <h3 className="comming-text">Coming soon</h3>
                     </Link>
                 </div>
             </div>
@@ -121,6 +157,20 @@ export const PatientProfile = () => {
                     </div>
                 </div>
             </div>
+            {isModalOpen && (
+                <Modals
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    profileData={profileData}
+                    updateProfileData={updateProfileData}
+                />
+            )}
         </>
     );
-}
+};
+
+
+
+
+
+
