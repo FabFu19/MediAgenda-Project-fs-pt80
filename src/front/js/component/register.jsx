@@ -18,13 +18,8 @@ export const Register = () => {
 
     return (
         <>
-        <div className="row">
-        <div className="col-6 mb-3">
         <h3 className="doctor-register-title">Register</h3>
-        </div>
-        </div>
         <div className="doctor-register-container">
-            
             <div className="doctor-register-card">
                 <form onSubmit={handleSubmit}>
                     <div className="row">

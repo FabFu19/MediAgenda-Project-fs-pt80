@@ -1,31 +1,30 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import logo_footer from "../../img/logo_footer.png";
 
 export const Footer = () => (
-    <footer>
-        <div className="bg-primary text-white py-2  d-flex justify-content-between align-items-center text-opacity-75"
-        style={{ fontFamily: 'Gantari, sans-serif', fontSize: '12px', background: 'linear-gradient(180deg, #6F4CB0 20%, #4632A5 100%)'}}>
-            <div className="container ps-4">
-            <img 
-            src="https://github.com/FabFu19/MediAgenda-Project-fs-pt80/raw/799116be9c56823c46f063306d29671d34a2fd5b/src/front/img/image%205.png" 
-            alt="Logo" 
-            style={{ maxWidth: "50%", height: "auto" }} 
-            />
-            </div>
-            <div className="container">
-                <Link to="/about" className="text-white text-decoration-none text-opacity-75">
-                    <span className="mb-0"style={{ fontFamily: 'Gantari, sans-serif', fontSize: '12px' }}>About us</span>
-                </Link>
-            </div>
-            <div className="container">
-            <Link to="/support" className="text-white text-decoration-none text-opacity-75">
-            <span className="mb-0"style={{ fontFamily: 'Gantari, sans-serif', fontSize: '12px' }}>Support</span>
-                </Link>
-            </div>
-            <div className="container">
+  <footer className="footer">
+    <div className="footer-body">
+      <div className="container"> 
+        <div className="row justify-content-between align-items-center text-center row-footer"> 
+          <div className="col-lg-3 col-md-6 col-sm-12">
+            <img className="footer-logo" src={logo_footer} alt="Logo" />
+          </div>
+          <div className="col-lg-2 col-md-6 col-sm-12  mb-3 mb-lg-0">
+            <Link to="/about" className="footer-link">
+              About us
+            </Link>
+          </div>
+          <div className="col-lg-2 col-md-6 col-sm-12  mb-3 mb-lg-0">
+            <Link to="/support" className="footer-link">
+              Support
+            </Link>
+          </div>
+          <div className="col-lg-3 col-md-6 col-sm-12">
             © 2025 MediAgenda. All rights reserved.
-            </div>
-        
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </footer>
 );

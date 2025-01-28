@@ -17,10 +17,14 @@ import { Register } from "./component/register.jsx";
 import { Modals } from "./component/editinformation.jsx";
 import { Profile } from "./pages/profile.jsx";
 import { BookAppointment } from "./component/book_appointment.jsx";
+<<<<<<< HEAD
 import { Calendar } from "./component/calendar.jsx";
 
 
 
+=======
+import { TestInterface } from "./component/test.jsx";
+>>>>>>> e1d066e2fe6af41bda49d8abc7739f3e6443dec0
 
 
 //create your first component
@@ -44,8 +48,13 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Modals />} path="/editinformation" />
                         <Route element={<Profile />} path="/profile" />
+<<<<<<< HEAD
                         <Route element={<BookAppointment />} path="/book_appointment" />
                         <Route element={<Calendar />} path="/calendar" /> 
+=======
+                        <Route element={<BookAppointment />} path="/book_appointment" /> 
+                        <Route element={<TestInterface />} path="/test" />
+>>>>>>> e1d066e2fe6af41bda49d8abc7739f3e6443dec0
                         {/* <Route element={<Register />} path="/register" /> */}
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
