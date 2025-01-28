@@ -14,8 +14,8 @@ import os
 
 api = Blueprint('api', __name__)
 
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-CLIENT_SECRET_FILE = "./client_secret.json" 
+CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
+CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
 # Flujo de OAuth
