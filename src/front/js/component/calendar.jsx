@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 const specialties = [
   "Cardiologist",
   "Dermatologist",
@@ -90,58 +91,64 @@ export const Calendar = () => {
 
   return (
     <>
-      <div className="calendar-container mb-5">
+      <div className="appointment-calendar-container mb-5 text-center">
         {/* Barra de búsqueda */}
-        <div className="search-bar">
-          <input
-            type="text"
-            className="search-input"
-            placeholder="e.g. Madrid, Madrid"
-          />
-          <button className="search-button">Search</button>
-        </div>
+        {!showCalendar && (
+          <div className="appointment-search-bar">
+            <input
+              type="text"
+              className="appointment-search-input"
+              placeholder="e.g. Madrid, Madrid"
+            />
+            <button className="appointment-search-button">Search</button>
+          </div>
+        )}
 
         {/* Carrusel de especialidades */}
-        <div className="carousel">
-          <button className="carousel-arrow" onClick={handlePrevious}>
-            &#8592;
-          </button>
-          <div className="carousel-item active">{selectedSpecialty}</div>
-          <button className="carousel-arrow" onClick={handleNext}>
-            &#8594;
-          </button>
-        </div>
+        {!showCalendar && (
+          <div className="appointment-carousel">
+            <button className="appointment-carousel-arrow" onClick={handlePrevious}>
+              &#8592;
+            </button>
+            <div className="appointment-carousel-item active">{selectedSpecialty}</div>
+            <button className="appointment-carousel-arrow" onClick={handleNext}>
+              &#8594;
+            </button>
+          </div>
+        )}
 
         {/* Lista de doctores */}
-        <div className="specialty-doctors">
-          <ul>
-            {doctors.map((doctor, index) => (
-              <li
-                key={index}
-                className={`doctor-item ${
-                  selectedDoctor === doctor ? "selected" : ""
-                }`}
-                onClick={() => handleSelectDoctor(doctor)}
-              >
-                {doctor}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {!showCalendar && (
+          <div className="appointment-specialty-doctors ms-2">
+            <ul>
+              {doctors.map((doctor, index) => (
+                <li
+                  key={index}
+                  className={`appointment-doctor-item ${
+                    selectedDoctor === doctor ? "selected" : ""
+                  }`}
+                  onClick={() => handleSelectDoctor(doctor)}
+                >
+                  {doctor}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {/* Calendario */}
         {showCalendar && (
-          <div className="calendar">
-            <div className="calendar-grid">
+          <div className="appointment-calendar">
+            <div className="appointment-calendar-grid">
               {weekDays.map((day, index) => (
-                <div key={index} className="calendar-weekday">
+                <div key={index} className="appointment-calendar-weekday">
                   {day}
                 </div>
               ))}
               {Array.from({ length: days }, (_, i) => i + 1).map((day) => (
                 <div
                   key={day}
-                  className={`calendar-day ${
+                  className={`appointment-calendar-day ${
                     selectedDate?.getDate() === day ? "selected" : ""
                   }`}
                   onClick={() => handleDayClick(day)}
@@ -153,7 +160,7 @@ export const Calendar = () => {
 
             {/* Detalles de la cita */}
             {selectedDate && (
-              <div className="appointment-details">
+              <div className="appointment-details-container">
                 <p>
                   <strong>Date:</strong>{" "}
                   {selectedDate.toLocaleDateString("en-EN", {
@@ -162,7 +169,7 @@ export const Calendar = () => {
                     year: "numeric",
                   })}
                 </p>
-                <div className="time-selector">
+                <div className="appointment-time-selector">
                   <label htmlFor="time">Time:</label>
                   <input
                     type="time"
@@ -174,7 +181,7 @@ export const Calendar = () => {
               </div>
             )}
 
-            <button className="schedule-button" onClick={handleSchedule}>
+            <button className="appointment-schedule-button" onClick={handleSchedule}>
               Schedule
             </button>
           </div>
@@ -182,10 +189,9 @@ export const Calendar = () => {
 
         {/* Lista de citas programadas */}
         {appointments.length > 0 && (
-          <div className="appointments-list">
-            <h3>Scheduled</h3>
+          <div className="appointment-list mt-3">
             {appointments.map((appointment, index) => (
-              <p key={index} className="appointment-item">
+              <p key={index} className="appointment-list-item">
                 {appointment}
               </p>
             ))}
@@ -195,3 +201,4 @@ export const Calendar = () => {
     </>
   );
 };
+
