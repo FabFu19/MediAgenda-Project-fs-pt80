@@ -5,6 +5,7 @@ import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
+from google.oauth2 import id_token
 from api.utils import APIException, generate_sitemap
 from api.models import db, Users, Pacientes, Especialistas, DisponibilidadMedico, Citas
 from api.routes import api
@@ -23,8 +24,8 @@ app.url_map.strict_slashes = False
 
 app.config["JWT_SECRET_KEY"] = os.getenv('JWT_SECRET_KEY')
 jwt = JWTManager(app)
-
 #app.config("JWT_ACCESS_TOKEN_EXPIRES") = datetime(hours=1)
+
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -41,6 +42,12 @@ db.init_app(app)
 # @api.before_first_req
 # def setup_database():
 #     db.createall()
+
+
+
+
+
+
 
 # add the admin
 setup_admin(app)

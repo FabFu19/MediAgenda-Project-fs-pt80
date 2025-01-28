@@ -116,12 +116,158 @@ const getState = ({ getStore, getActions, setStore }) => {
               }
             },
 
-            //agendar cita con (Google Calendar API)
-      
-            
-            // manejo disponibilidad (Google Calendar API)
-            
+            // Obtener disponibilidad del médico
+            fetchAvailability: async (medicoId) => {
+              try {
+                  setStore({ loading: true });
+                  const token = getStore().token;
+
+                  const resp = await fetch(`${getStore().url}/api/calendar/availability`, {
+                      method: "POST",
+                      headers: {
+                          Authorization: `Bearer ${token}`,
+                          "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                          access_token: token,
+                          medico_id: medicoId,
+                      }),
+                  });
+
+                  if (resp.ok) {
+                      const data = await resp.json();
+                      setStore({ availability: data.events, loading: false });
+                  } else {
+                      setStore({ loading: false, error: "Error al obtener disponibilidad." });
+                      console.error("Error al obtener disponibilidad.");
+                  }
+              } catch (error) {
+                  setStore({ loading: false, error: "Error al obtener disponibilidad." });
+                  console.error("Error:", error);
+              }
           },
+
+          // Crear disponibilidad del médico
+          createAvailability: async (availabilityData) => {
+              try {
+                  setStore({ loading: true });
+                  const token = getStore().token;
+
+                  const resp = await fetch(`${getStore().url}/api/disponibilidad`, {
+                      method: "POST",
+                      headers: {
+                          Authorization: `Bearer ${token}`,
+                          "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(availabilityData),
+                  });
+
+                  if (resp.ok) {
+                      const data = await resp.json();
+                      getActions().fetchAvailability();
+                      setStore({ loading: false });
+                      console.log("Disponibilidad creada:", data.msg);
+                  } else {
+                      setStore({ loading: false, error: "Error al crear disponibilidad." });
+                  }
+              } catch (error) {
+                  setStore({ loading: false, error: "Error al crear disponibilidad." });
+                  console.error("Error:", error);
+              }
+          },
+
+          // Crear una cita
+          createAppointment: async (appointmentData) => {
+              try {
+                  setStore({ loading: true });
+                  const token = getStore().token;
+
+                  const resp = await fetch(`${getStore().url}/api/citas`, {
+                      method: "POST",
+                      headers: {
+                          Authorization: `Bearer ${token}`,
+                          "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(appointmentData),
+                  });
+
+                  if (resp.ok) {
+                      const data = await resp.json();
+                      getActions().fetchAppointments();
+                      setStore({ loading: false });
+                      console.log("Cita creada:", data.msg);
+                  } else {
+                      setStore({ loading: false, error: "Error al crear cita." });
+                  }
+              } catch (error) {
+                  setStore({ loading: false, error: "Error al crear cita." });
+                  console.error("Error:", error);
+              }
+          },
+
+          // Actualizar una cita
+          updateAppointment: async (appointmentId, appointmentData) => {
+              try {
+                  setStore({ loading: true });
+                  const token = getStore().token;
+
+                  const resp = await fetch(
+                      `${getStore().url}/api/calendar/events/${appointmentId}`,
+                      {
+                          method: "PUT",
+                          headers: {
+                              Authorization: `Bearer ${token}`,
+                              "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify(appointmentData),
+                      }
+                  );
+
+                  if (resp.ok) {
+                      const data = await resp.json();
+                      getActions().fetchAppointments();
+                      setStore({ loading: false });
+                      console.log("Cita actualizada:", data.msg);
+                  } else {
+                      setStore({ loading: false, error: "Error al actualizar cita." });
+                  }
+              } catch (error) {
+                  setStore({ loading: false, error: "Error al actualizar cita." });
+                  console.error("Error:", error);
+              }
+          },
+
+          // Eliminar una cita
+          deleteAppointment: async (appointmentId) => {
+              try {
+                  setStore({ loading: true });
+                  const token = getStore().token;
+
+                  const resp = await fetch(
+                      `${getStore().url}/api/calendar/events/${appointmentId}`,
+                      {
+                          method: "DELETE",
+                          headers: {
+                              Authorization: `Bearer ${token}`,
+                              "Content-Type": "application/json",
+                          },
+                      }
+                  );
+
+                  if (resp.ok) {
+                      getActions().fetchAppointments();
+                      setStore({ loading: false });
+                      console.log("Cita eliminada.");
+                  } else {
+                      setStore({ loading: false, error: "Error al eliminar cita." });
+                  }
+              } catch (error) {
+                  setStore({ loading: false, error: "Error al eliminar cita." });
+                  console.error("Error:", error);
+              }
+          },
+            
+        },
 	};
 };
 
