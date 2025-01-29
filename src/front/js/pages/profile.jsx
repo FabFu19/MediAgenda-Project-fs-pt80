@@ -1,68 +1,34 @@
-import React from "react";
-
-
+import React, { useContext, useEffect } from "react";
+import { Context } from "../store/appContext";
+import { PatientProfile } from "../component/profile.jsx";
+import { Doctor } from "../component/doctor_profile.jsx";
 
 export const Profile = () => {
-    return(
+    const { store, actions } = useContext(Context);
+
+    useEffect(() => {
+        
+        if (!store.user) {
+            actions.getProfile();
+        }
+    }, []);
+
+    return (
         <>
-            <div className="profile-container">
-                <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-8">
-                        <h1 className="text-dark">Profile</h1>
-                        <div className="d-flex">
-                            <div className="content-data-profile">
-                                <div className="container-info-profile">
-                                    <div>
-                                        <p>Name:</p>
-                                        <p>Pepe</p>
-                                    </div>
-                                    <div>
-                                        <p>Last Name:</p>
-                                        <p>El Bueno</p>
-                                    </div>
-                                    <div>
-                                        <p>Phone Number:</p>
-                                        <p>6458889999</p>
-                                    </div>
-                                    <div>
-                                        <p>Email:</p>
-                                        <p>pepebue@geeks.com</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span className="fa-regular fa-pen-to-square"></span>
-                                </div>
-                            </div>
-                            <div className="dot-states">
-                                <span>X</span>
-                                <span>X</span>
-                                <span>X</span>
-                            </div>
-                        </div>
-                        <div className="d-flex">
-                            <div className="d-flex">
-                                <img />
-                                <p></p>
-                            </div>
-                            <div>
-                                <h3>Medical</h3>
-                                <h3>History is</h3>
-                                <h3>Comming soon</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-4">
-                        <div>
-                            <h1></h1>
-                            <ul>
-                                <li></li>
-                            </ul>
-                        </div>
+            <div className="profile-body">
+                <div className="container text-start">
+                    <div className="row">
+                        <PatientProfile /> 
+                        <Doctor />
                     </div>
                 </div>
+                {/* <div className="profile-container container">
+                    <div className="row">
+                        {store.role === "paciente" ? <PatientProfile /> : <Doctor />}
+                    </div>
+                </div> */}
+                
             </div>
-        
         </>
-
     );
-}
+};
