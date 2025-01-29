@@ -43,7 +43,7 @@ export const Home = () => {
         <div className="image-container">
           <img src={image15} className="d-block" alt="Doctor 1" />
         </div>
-        <div className="carousel-caption">
+        <div className="professional-info">
           <h5>Dr. Jane Doe</h5>
           <p>Cardiology Specialist</p>
         </div>
