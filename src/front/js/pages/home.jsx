@@ -3,9 +3,7 @@ import group21Image from "../../img/Group 21.png";
 import image15 from "../../img/image 15.png";
 import image16 from "../../img/image 16.png";
 import image17 from "../../img/image 17.png";
-import "../../styles/home.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 
 export const Home = () => {
   return (
