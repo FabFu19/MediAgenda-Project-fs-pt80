@@ -1,8 +1,8 @@
 import React from "react";
-import group21Image from "../../img/Group 21.png";
-import image15 from "../../img/doctor2.png";
-import image16 from "../../img/doctor5.png";
-import image17 from "../../img/doctor6.png";
+import group21Image from "../../img/laptop.png";
+import image15 from "../../img/doctor9.png";
+import image16 from "../../img/doctor8.png";
+import image17 from "../../img/doctor10.png";
 
 
 export const Home = () => {
@@ -10,6 +10,7 @@ export const Home = () => {
     <div className="home_body">
       {/* Sección Principal */}
       <section className="hero-section">
+      <div className="cuadrado"></div>
         <div className="container">
           <div className="row">
             <div className="col-sm-12 col-md-7 col-lg-7">
@@ -24,15 +25,11 @@ export const Home = () => {
             </div>
           </div>
           <div className="col-sm-12 col-md-5 col-lg-5">
-          <div className="hero-image d-flex">
-          <img src={group21Image} alt="Laptop with calendar" />
-          <div className="degradado-hero-img">
-
-          </div>
-        </div>
-          </div>
-
-        </div>
+            <div className="hero-image d-flex">
+              <img src={group21Image} alt="Laptop with calendar" />
+            </div>
+          </div>
+       </div>
 
 
       </section>
