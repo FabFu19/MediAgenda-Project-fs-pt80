@@ -12,8 +12,6 @@ from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
 import os
 
-
-
 api = Blueprint('api', __name__)
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"

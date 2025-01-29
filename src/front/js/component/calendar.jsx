@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-//import { gapi } from "gapi-script";
-//import { useFlux } from "@/store/flux";
 
 const specialties = [
   "Cardiologist",
@@ -49,10 +47,20 @@ export const Calendar = () => {
   const [selectedTime, setSelectedTime] = useState("09:00");
 
   useEffect(() => {
-    actions.fetchAppointments();
+    if (actions.fetchAppointments) {
+      actions.fetchAppointments();
+    }
   }, [actions]);
 
   const handleCreateEvent = async () => {
+    if (!selectedDoctor) {
+      console.error("No doctor selected");
+      return;
+    }
+    if (!selectedDate) {
+      console.error("No date selected");
+      return;
+    }
     try {
       const appointmentData = {
         medico_id: selectedDoctor,
