@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../../img/logo-medi-2.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext.js"
 
 export const Navbar = () => {
+    const {store, actions} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false)
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        actions.logout();  
+        navigate("/login"); 
+    };
     const location = useLocation();
+
 
 
     const isProfilePage = location.pathname === "/profile";
@@ -20,16 +28,16 @@ export const Navbar = () => {
                 <div className={`align-items-center nav-container-items ${isOpen && "open"}`}>
                     <ul className="navbar-nav nav_links">
                         <div className="nav-btn-container-responsive">
-                            <Link to="/" className="btn custom-btn special_margin" type="submit">
+                            <div  className="btn custom-btn special_margin" onClick={handleLogout}>
                                 <p>Logout</p>
-                            </Link>
+                            </div>
                         </div>
                     </ul>
                 </div>
                 <li className="nav-btn-container">
-                    <Link to="/" className="btn custom-btn special_margin" type="submit">
+                    <div className="btn custom-btn special_margin" onClick={handleLogout}>
                         <p>Logout</p>
-                    </Link>
+                    </div>
                 </li>
                 <div className={`nav-toggle ${isOpen && "open"}`} onClick={() => setIsOpen(!isOpen)}>
                     <span></span>
@@ -137,16 +145,16 @@ export const Navbar = () => {
                 <div className={`align-items-center nav-container-items ${isOpen && "open"}`}>
                     <ul className="navbar-nav nav_links">
                         <div className="nav-btn-container-responsive">
-                            <Link to="/" className="btn custom-btn special_margin" type="submit">
+                            <div className="btn custom-btn special_margin" onClick={handleLogout}>
                                 <p>Logout</p>
-                            </Link>
+                            </div>
                         </div>
                     </ul>
                 </div>
                 <li className="nav-btn-container">
-                    <Link to="/" className="btn custom-btn special_margin" type="submit">
+                    <div className="btn custom-btn special_margin" onClick={handleLogout}>
                         <p>Logout</p>
-                    </Link>
+                    </div>
                 </li>
                 <div className={`nav-toggle ${isOpen && "open"}`} onClick={() => setIsOpen(!isOpen)}>
                     <span></span>
