@@ -16,11 +16,18 @@ export const Profile = () => {
     return (
         <>
             <div className="profile-body">
-                <div className="profile-container container">
+                <div className="container">
+                    <div className="row">
+                        <PatientProfile /> 
+                        <Doctor />
+                    </div>
+                </div>
+                {/* <div className="profile-container container">
                     <div className="row">
                         {store.role === "paciente" ? <PatientProfile /> : <Doctor />}
                     </div>
-                </div>
+                </div> */}
+                
             </div>
         </>
     );
