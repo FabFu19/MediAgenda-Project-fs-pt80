@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
+//import { gapi } from "gapi-script";
+//import { useFlux } from "@/store/flux";
 
 const specialties = [
   "Cardiologist",
@@ -38,12 +40,32 @@ const doctorsBySpecialty = {
 const daysInMonth = (month, year) => new Date(year, month, 0).getDate();
 
 export const Calendar = () => {
+  const { store, actions } = useContext(Context);
   const [selectedSpecialtyIndex, setSelectedSpecialtyIndex] = useState(0);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [appointments, setAppointments] = useState([]);
   const [selectedTime, setSelectedTime] = useState("09:00");
+
+  useEffect(() => {
+    actions.fetchAppointments();
+  }, [actions]);
+
+  const handleCreateEvent = async () => {
+    try {
+      const appointmentData = {
+        medico_id: selectedDoctor,
+        appointment_date: selectedDate.toISOString().split("T")[0],
+        appointment_time: selectedTime,
+        notes: "Consulta médica",
+      };
+      await actions.createAppointment(appointmentData);
+      setAppointments([...appointments, appointmentData]);
+    } catch (error) {
+      console.error("Error scheduling appointment:", error);
+    }
+  };
 
   const handleNext = () => {
     setSelectedSpecialtyIndex((prevIndex) => (prevIndex + 1) % specialties.length);
@@ -71,18 +93,6 @@ export const Calendar = () => {
     setSelectedDate(new Date(currentYear, currentMonth, day));
   };
 
-  const handleSchedule = () => {
-    if (selectedDate) {
-      const formattedDate = selectedDate.toLocaleDateString("en-EN", {
-        weekday: "long",
-        day: "2-digit",
-        month: "long",
-      });
-      const newAppointment = `${formattedDate} at ${selectedTime} with ${selectedDoctor}`;
-      setAppointments([...appointments, newAppointment]);
-    }
-  };
-
   const selectedSpecialty = specialties[selectedSpecialtyIndex];
   const doctors = doctorsBySpecialty[selectedSpecialty] || [];
   const today = new Date();
@@ -92,51 +102,41 @@ export const Calendar = () => {
   return (
     <>
       <div className="appointment-calendar-container mb-5 text-center">
-        {/* Barra de búsqueda */}
-        {!showCalendar && (
-          <div className="appointment-search-bar">
-            <input
-              type="text"
-              className="appointment-search-input"
-              placeholder="e.g. Madrid, Madrid"
-            />
-            <button className="appointment-search-button">Search</button>
-          </div>
-        )}
+        <div className="appointment-search-bar">
+          <input
+            type="text"
+            className="appointment-search-input"
+            placeholder="e.g. Madrid, Madrid"
+          />
+          <button className="appointment-search-button">Search</button>
+        </div>
 
-        {/* Carrusel de especialidades */}
-        {!showCalendar && (
-          <div className="appointment-carousel">
-            <button className="appointment-carousel-arrow" onClick={handlePrevious}>
-              &#8592;
-            </button>
-            <div className="appointment-carousel-item active">{selectedSpecialty}</div>
-            <button className="appointment-carousel-arrow" onClick={handleNext}>
-              &#8594;
-            </button>
-          </div>
-        )}
+        <div className="appointment-carousel">
+          <button className="appointment-carousel-arrow" onClick={handlePrevious}>
+            &#8592;
+          </button>
+          <div className="appointment-carousel-item active">{selectedSpecialty}</div>
+          <button className="appointment-carousel-arrow" onClick={handleNext}>
+            &#8594;
+          </button>
+        </div>
 
-        {/* Lista de doctores */}
-        {!showCalendar && (
-          <div className="appointment-specialty-doctors ms-2">
-            <ul>
-              {doctors.map((doctor, index) => (
-                <li
-                  key={index}
-                  className={`appointment-doctor-item ${
-                    selectedDoctor === doctor ? "selected" : ""
-                  }`}
-                  onClick={() => handleSelectDoctor(doctor)}
-                >
-                  {doctor}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <div className="appointment-specialty-doctors ms-2">
+          <ul>
+            {doctors.map((doctor, index) => (
+              <li
+                key={index}
+                className={`appointment-doctor-item ${
+                  selectedDoctor === doctor ? "selected" : ""
+                }`}
+                onClick={() => handleSelectDoctor(doctor)}
+              >
+                {doctor}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        {/* Calendario */}
         {showCalendar && (
           <div className="appointment-calendar">
             <div className="appointment-calendar-grid">
@@ -158,7 +158,6 @@ export const Calendar = () => {
               ))}
             </div>
 
-            {/* Detalles de la cita */}
             {selectedDate && (
               <div className="appointment-details-container">
                 <p>
@@ -181,18 +180,20 @@ export const Calendar = () => {
               </div>
             )}
 
-            <button className="appointment-schedule-button" onClick={handleSchedule}>
+            <button
+              className="appointment-schedule-button"
+              onClick={handleCreateEvent}
+            >
               Schedule
             </button>
           </div>
         )}
 
-        {/* Lista de citas programadas */}
         {appointments.length > 0 && (
           <div className="appointment-list mt-3">
             {appointments.map((appointment, index) => (
               <p key={index} className="appointment-list-item">
-                {appointment}
+                {`Appointment on ${appointment.appointment_date} at ${appointment.appointment_time} with ${appointment.medico_id}`}
               </p>
             ))}
           </div>
@@ -201,4 +202,3 @@ export const Calendar = () => {
     </>
   );
 };
-
