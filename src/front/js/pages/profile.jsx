@@ -16,7 +16,7 @@ export const Profile = () => {
     return (
         <>
             <div className="profile-body">
-                <div className="container">
+                <div className="container text-start">
                     <div className="row">
                         <PatientProfile /> 
                         <Doctor />
