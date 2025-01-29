@@ -1,128 +1,216 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	return {
-		      store: {
-            user: null, 
-            token: null, 
-            role: null,
+    return {
+        store: {
+            user: null,
+            token: null,
+            role: null, 
             appointments: [],
             availability: [],
             loading: false,
             error: null,
-            url: "https://glowing-succotash-5g4p4995q9vw2v6q6-3001.app.github.dev"
-          },
-      
-          actions: {
+            
+        },
 
+        actions: {
+            // Registro de usuario
             register: async (userData) => {
                 try {
+                    setStore({ loading: true, error: null });
+                    const resp = await fetch(`${process.env.BACKEND_URL}/api/register`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(userData),
+                    });
 
-                  setStore({loading: true, error: null})
-
-                  const resp = await fetch(`${process.env.BACKEND_URL}/api/register`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(userData),
-                  });
-        
-                  if (resp.ok) {
-                    setStore({ loading: false }); 
-                    console.log("Registration successful.");
-                  } else {
-                    setStore({ loading: false, error: "Error al registrar el usuario." });
-                    console.error("Failed to register.");
-                  }
+                    if (resp.ok) {
+                        console.log("Registro exitoso.");
+                        setStore({ loading: false });
+                    } else {
+                        setStore({ loading: false, error: "Error al registrar el usuario." });
+                    }
                 } catch (error) {
-                  setStore({ loading: false, error: "Error durante el registro." });
-                  console.error("Error during registration:", error);
+                    setStore({ loading: false, error: "Error durante el registro." });
+                    console.error("Error durante el registro:", error);
                 }
-              },
+            },
 
+            // Inicio de sesión
             login: async (email, password) => {
-              try {
-                // const store = getStore();
-                setStore({ loading: true, error: null }); 
-                
-                const resp = await fetch(`${process.env.BACKEND_URL}/api/login`, {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ email, password }),
-                });
-      
-                if (resp.ok) {
-                  const data = await resp.json();
-                  setStore({ user: data.user, token: data.token, role: data.user.paciente ? "paciente" : "especialista", loading: false});
-                  localStorage.setItem("token", data.token);
-                } else {
-                  setStore({ loading: false, error: "Credenciales inválidas." });
-                  console.error("Error al iniciar sesion.");
+                try {
+                    setStore({ loading: true, error: null });
+                    const resp = await fetch(`${getStore().apiUrl}/api/login`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, password }),
+                    });
+
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        setStore({
+                            user: data.user,
+                            token: data.token,
+                            role: data.user.paciente ? "paciente" : "especialista",
+                            loading: false,
+                        });
+                        localStorage.setItem("token", data.token);
+                    } else {
+                        setStore({ loading: false, error: "Credenciales inválidas." });
+                    }
+                } catch (error) {
+                    setStore({ loading: false, error: "Error durante el inicio de sesión." });
+                    console.error("Error durante el login:", error);
                 }
-              } catch (error) {
-                setStore({ loading: false, error: "Error durante el login." });
-                console.error("Error during login:", error);
-              }
-              
             },
 
+            // Obtener perfil del usuario
             getProfile: async () => {
+                const store = getStore();
+                try {
+                    const token = store.token || localStorage.getItem("token");
+                    setStore({ loading: true, error: null });
 
-              const store = getStore();
-              setStore({ loading: true, error: null });
+                    const resp = await fetch(`${process.env.BACKEND_URL}/api/profile`, {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    });
 
-              try {
-                  const token = store.token || localStorage.getItem("token");
-                  // if (!token) throw new Error("Usuario no autenticado.");
-          
-                  const response = await fetch(`${process.env.BACKEND_URL}/api/profile`, {
-                      method: "GET",
-                      headers: {
-                          Authorization: `Bearer ${token}`,
-                          "Content-Type": "application/json",
-                      },
-                  });
-          
-                  if (!response.ok) {
-                      throw new Error("Error al obtener el perfil del usuario.");
-                  }
-          
-                  const data = await response.json();
-                  setStore({
-                      user: data.user, profile: data.profile, role: data.user.paciente ? "paciente" : "especialista", loading: false,
-                  });
-              } catch (error) {
-                  console.error("Error en obtener el Perfil:", error);
-              }
-              
-            },
-            
-            logout: () => {
-              setStore({ user: null, token: null, role: null });
-              localStorage.removeItem("token");
-            },
-      
-            
-    
-            fetchAppointments: async () => {
-              const { token } = getStore();
-              try {
-                const resp = await fetch(`${process.env.BACKEND_URL}/api/appointments`, {
-                  headers: { Authorization: `Bearer ${token}` },
-                });
-                if (resp.ok) {
-                  const data = await resp.json();
-                  setStore({ appointments: data });
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        setStore({
+                            user: data.user,
+                            role: data.role,
+                            profile: data.profile,
+                            loading: false,
+                        });
+                    } else {
+                        setStore({ loading: false, error: "Error al obtener el perfil." });
+                    }
+                } catch (error) {
+                    setStore({ loading: false, error: "Error al obtener el perfil." });
+                    console.error("Error en getProfile:", error);
                 }
-              } catch (error) {
-                console.error("Error fetching appointments:", error);
-              }
             },
 
-            //agendar cita con (Google Calendar API)
-      
-            
-            // manejo disponibilidad (Google Calendar API)
-            
-          },
-	};
+            // Cerrar sesión
+            logout: () => {
+                setStore({ user: null, token: null, role: null });
+                localStorage.removeItem("token");
+            },
+
+            // Obtener disponibilidad del médico (paciente)
+            fetchAvailability: async (medicoId) => {
+                try {
+                    setStore({ loading: true });
+                    const token = getStore().token;
+
+                    const resp = await fetch(`${process.env.BACKEND_URL}/api/calendar/availability`, {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ medico_id: medicoId }),
+                    });
+
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        setStore({ availability: data.events, loading: false });
+                    } else {
+                        setStore({ loading: false, error: "Error al obtener disponibilidad." });
+                    }
+                } catch (error) {
+                    setStore({ loading: false, error: "Error al obtener disponibilidad." });
+                    console.error("Error en fetchAvailability:", error);
+                }
+            },
+
+            // Crear disponibilidad (médico)
+            createAvailability: async (availabilityData) => {
+                try {
+                    setStore({ loading: true });
+                    const token = getStore().token;
+
+                    const resp = await fetch(`${process.env.BACKEND_URL}/api/disponibilidad`, {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(availabilityData),
+                    });
+
+                    if (resp.ok) {
+                        console.log("Disponibilidad creada exitosamente.");
+                        setStore({ loading: false });
+                        getActions().fetchAvailability(availabilityData.medico_id);
+                    } else {
+                        setStore({ loading: false, error: "Error al crear disponibilidad." });
+                    }
+                } catch (error) {
+                    setStore({ loading: false, error: "Error al crear disponibilidad." });
+                    console.error("Error en createAvailability:", error);
+                }
+            },
+
+            // Crear cita (paciente)
+            createAppointment: async (appointmentData) => {
+                try {
+                    setStore({ loading: true });
+                    const token = getStore().token;
+
+                    const resp = await fetch(`${process.env.BACKEND_URL}/api/citas`, {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(appointmentData),
+                    });
+
+                    if (resp.ok) {
+                        console.log("Cita creada exitosamente.");
+                        setStore({ loading: false });
+                        getActions().fetchAppointments();
+                    } else {
+                        setStore({ loading: false, error: "Error al crear cita." });
+                    }
+                } catch (error) {
+                    setStore({ loading: false, error: "Error al crear cita." });
+                    console.error("Error en createAppointment:", error);
+                }
+            },
+
+            // Cancelar o eliminar cita
+            deleteAppointment: async (appointmentId) => {
+                try {
+                    setStore({ loading: true });
+                    const token = getStore().token;
+
+                    const resp = await fetch(`${process.env.BACKEND_URL}/api/calendar/events/${appointmentId}`, {
+                        method: "DELETE",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    });
+
+                    if (resp.ok) {
+                        console.log("Cita eliminada exitosamente.");
+                        setStore({ loading: false });
+                        getActions().fetchAppointments();
+                    } else {
+                        setStore({ loading: false, error: "Error al eliminar cita." });
+                    }
+                } catch (error) {
+                    setStore({ loading: false, error: "Error al eliminar cita." });
+                    console.error("Error en deleteAppointment:", error);
+                }
+            },
+        },
+    };
 };
 
 export default getState;

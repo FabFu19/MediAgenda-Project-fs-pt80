@@ -42,8 +42,8 @@ export const Login = () => {
                             Log in
                         </button>
                         <p className="text-center mt-3">
-                            <spam>
-                                If you are not registered you can  
+                            <spam className="register-warning">
+                                If you are not registered you can&nbsp;
                                 <a 
                                     href="https://congenial-capybara-v6g54v55jgp5hxqr7-3000.app.github.dev/register" 
                                     className="register-link">
