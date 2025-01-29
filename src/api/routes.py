@@ -156,7 +156,7 @@ def google_auth():
     flow = Flow.from_client_secrets_file(
         CLIENT_SECRET_FILE, 
         scopes=SCOPES, 
-        redirect_uri="https://glowing-succotash-5g4p4995q9vw2v6q6-3001.app.github.dev/redirect"
+        redirect_uri= "https://glowing-succotash-5g4p4995q9vw2v6q6-3001.app.github.dev"
     )
     
     auth_url, state = flow.authorization_url(prompt="consent")
@@ -166,30 +166,30 @@ def google_auth():
     return jsonify({"auth_url": auth_url})
 
 
-@api.route('/auth/google/callback', methods=['GET'])
-def google_callback():
-    try:
-        flow = Flow.from_client_secrets_file(
-        CLIENT_SECRET_FILE, 
-        scopes=SCOPES, 
-        redirect_uri="https://glowing-succotash-5g4p4995q9vw2v6q6-3001.app.github.dev/redirect")
+# @api.route('/auth/google/callback', methods=['GET'])
+# def google_callback():
+#     try:
+#         flow = Flow.from_client_secrets_file(
+#         CLIENT_SECRET_FILE, 
+#         scopes=SCOPES, 
+#         redirect_uri="https://glowing-succotash-5g4p4995q9vw2v6q6-3001.app.github.dev")
 
-        # if "oauth_state" not in session or session["oauth_state"] != request.args.get("state"):
-        #     return jsonify({"error": "CSRF Warning! State mismatch."}), 400
+#         # if "oauth_state" not in session or session["oauth_state"] != request.args.get("state"):
+#         #     return jsonify({"error": "CSRF Warning! State mismatch."}), 400
 
-        flow.fetch_token(authorization_response=request.url)
-        credentials = flow.credentials
+#         flow.fetch_token(authorization_response=request.url)
+#         credentials = flow.credentials
 
-        return jsonify({
-            "access_token": credentials.token,
-            "refresh_token": credentials.refresh_token,
-            "token_uri": credentials.token_uri,
-            "client_id": credentials.client_id,
-            "client_secret": credentials.client_secret,
-        }), 200
+#         return jsonify({
+#             "access_token": credentials.token,
+#             "refresh_token": credentials.refresh_token,
+#             "token_uri": credentials.token_uri,
+#             "client_id": credentials.client_id,
+#             "client_secret": credentials.client_secret,
+#         }), 200
 
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
 
 @api.route('/disponibilidad', methods=['POST'])
 @jwt_required()
@@ -213,12 +213,12 @@ def crear_disponibilidad():
         event_body = {
             "summary": "Disponibilidad del Médico",
             "description": f"El Dr. {especialista.user.nombre} {especialista.user.apellido} está disponible en este horario.",
-            "start": {"dateTime": start_time, "timeZone": "America/New_York"},
-            "end": {"dateTime": end_time, "timeZone": "America/New_York"},
+            "start": {"dateTime": start_time, "timeZone": "Etc/GMT"},
+            "end": {"dateTime": end_time, "timeZone": "Etc/GMT"},
             "transparency": "transparent",  
             "visibility": "public",
         }
-        event = service.events().insert(calendarId="primary", body=event_body).execute()
+        calendar = service.calendars().insert(calendarId="primary", body=event_body).execute()
 
         nueva_disponibilidad = DisponibilidadMedico(
             medico_id= especialista.id,
@@ -226,7 +226,7 @@ def crear_disponibilidad():
             hora_inicio= hora_inicio,
             hora_final= hora_final,
             is_available= True,
-            google_event_id=event["id"]
+            google_event_id=calendar["id"]
         )
         db.session.add(nueva_disponibilidad)
         db.session.commit()
@@ -272,8 +272,8 @@ def actualizar_disponibilidad(id):
             event_body = {
                 "summary": "Disponibilidad del Médico",
                 "description": f"El Dr. {especialista.user.nombre} {especialista.user.apellido} ha actualizado su disponibilidad.",
-                "start": {"dateTime": start_time, "timeZone": "America/New_York"},
-                "end": {"dateTime": end_time, "timeZone": "America/New_York"},
+                "start": {"dateTime": start_time, "timeZone": "Etc/GMT"},
+                "end": {"dateTime": end_time, "timeZone": "Etc/GMT"},
                 "transparency": "transparent",
                 "visibility": "public",
             }
@@ -339,11 +339,11 @@ def agendar_cita():
 
         event_body = {
             "summary": f"Cita con {medico.user.nombre} {medico.user.apellido}",
-            "start": {"dateTime": start_time, "timeZone": "America/New_York"},
-            "end": {"dateTime": end_time.isoformat(), "timeZone": "America/New_York"},
+            "start": {"dateTime": start_time, "timeZone": "Etc/GMT"},
+            "end": {"dateTime": end_time.isoformat(), "timeZone": "Etc/GMT"},
             "attendees": [{"email": medico.user.email}, {"email": current_user.user.email}],
         }
-        event = service.events().insert(calendarId="primary", body=event_body).execute()
+        calendar = service.calendars().insert(calendarId="primary", body=event_body).execute()
 
         nueva_cita = Citas(
             paciente_id=current_user, 
@@ -352,7 +352,7 @@ def agendar_cita():
             appointment_date=fecha,
             appointment_time=hora,
             notes=data.get('notes', ''),
-            google_event_id=event["id"]
+            google_event_id=calendar["id"]
         )
         db.session.add(nueva_cita)
         db.session.commit()
@@ -402,8 +402,8 @@ def actualizar_cita(id):
         end_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S") + timedelta(hours=1)
 
         event_body = {
-            "start": {"dateTime": start_time, "timeZone": "America/New_York"},
-            "end": {"dateTime": end_time.isoformat(), "timeZone": "America/New_York"},
+            "start": {"dateTime": start_time, "timeZone": "Etc/GMT"},
+            "end": {"dateTime": end_time.isoformat(), "timeZone": "Etc/GMT"},
         }
         service.events().update(calendarId="primary", eventId=cita.google_event_id, body=event_body).execute()
 
