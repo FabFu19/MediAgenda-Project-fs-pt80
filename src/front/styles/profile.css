@@ -5,14 +5,17 @@ body {
 }
 .profile-body{
     background-color: rgba(205, 199, 237, 0.25);
+    padding: 30px 0 45px 0px;    
     
 }
 .prof-pinci-title{
     font-family: "Alata", serif;
     color: #3E2F9C;
     font-size: 34px;
-    margin-top: 20px;
+    /* padding-top: 20px; */
+    padding-bottom: 10px;
 }
+
 .profile-container{
     padding: 30px 15px 40px 15px;
     
@@ -144,6 +147,7 @@ body {
     display: flex;
     align-items: center;
     list-style-type: none;
+    margin-bottom: 10px;
 }
 
 .data-text-appoint{
@@ -177,16 +181,25 @@ body {
     margin-left: 10px;
     margin-right: 10px;
 }
+.no-appoint-msg{
+    color:#3E2F9C;
+    font-family: "Alata", serif;
+    font-size: 15px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
 
 /* Doctor-profile css */
-.doctor-profile .esp-pic {
+/* .doctor-profile .esp-pic {
     height: 207px;
     width: 190px;
     margin-top: 4px;
 }
 .doctor-profile .choose-speci-box {
     padding: 10px 15px 0 15px;
-}
+} */
 /* Responsive */ 
 
 @media (width <= 915px) {
