@@ -80,6 +80,7 @@ class Especialistas(db.Model):
 
     #Relacion disponibilidad del medico
     disponibilidad = db.relationship('DisponibilidadMedico', backref='especialistas', lazy=True)
+    citas = db.relationship('Citas', backref='especialistas')
 
     def __repr__(self):
         return f'<Especialistas {self.id}>'
