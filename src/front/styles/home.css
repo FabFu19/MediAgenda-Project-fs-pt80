@@ -29,6 +29,24 @@
   background: linear-gradient(#3E2F9C, #553CA9, #6445AC);
 }
 
+.btn-appointment {
+  display: inline-block;
+  background: linear-gradient(90deg, #3E2F9C, #6445AC); /* Degradado del botón */
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 25px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-appointment:hover {
+  transform: scale(1.05);
+}
+
 .hero-image img {
   max-width: 100%;
   height: auto;

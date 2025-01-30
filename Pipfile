@@ -20,9 +20,7 @@ flask-admin = "*"
 typing-extensions = "*"
 flask-jwt-extended = "==4.6.0"
 wtforms = "==3.1.2"
-google-api-python-client = "*"
 google-auth = "*"
-google-auth-oauthlib = "*"
 flask-session = "*"
 
 [requires]

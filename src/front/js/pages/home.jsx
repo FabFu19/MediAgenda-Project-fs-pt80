@@ -20,7 +20,9 @@ export const Home = () => {
                  We are here to make healthcare easier, because every visit counts and
                  every patient matters.
                 </p>
-                <button className="btn-appointment">Take an Appointment</button>
+                <div className="btn-appointment">
+                 Take an Appointment <i className="fas fa-arrow-right"></i>
+                </div>
               </div>
             </div>
           </div>
@@ -35,15 +37,23 @@ export const Home = () => {
       </section>
 
       {/* Sección "What do we do?" */}
-      <section className="what-we-do" id="about-us">
-        <h2>What do we do?</h2>
-        <p>
-          We developed a comprehensive solution to manage medical consultations
-          efficiently and securely. We facilitate appointment scheduling, access
-          to medical records, and communication between patients and doctors,
-          optimizing administrative processes for clinics and offices.
-        </p>
-      </section>
+      <section className="container py-5">
+  <div className="row align-items-center what-we-do">
+    {/* Título alineado a la izquierda */}
+    <div className="col-md-4 text-md-start text-center">
+      <h2>What do we do?</h2>
+    </div>
+    {/* Párrafo alineado a la derecha */}
+    <div className="col-md-8 text-md-end text-center">
+      <p>
+        We developed a comprehensive solution to manage medical consultations
+        efficiently and securely. We facilitate appointment scheduling, access
+        to medical records, and communication between patients and doctors,
+        optimizing administrative processes for clinics and offices.
+      </p>
+    </div>
+  </div>
+</section> 
 
 {/* Carrusel de Profesionales */}
 <section className="professional-slide">
@@ -54,7 +64,7 @@ export const Home = () => {
         <div className="image-container">
           <img src={image15} className="d-block" alt="Doctor 1" />
         </div>
-        <div className="professional-info">
+        <div className="carousel-caption">
           <h5>Dr. Jane Doe</h5>
           <p>Cardiology Specialist</p>
         </div>
@@ -112,7 +122,7 @@ export const Home = () => {
             "Excess sodium can increase blood pressure, and high sugar intake can
             contribute to obesity and diabetes."
           </p>
-          <footer>By Dr. Smith</footer>
+          <p>By Dr. Smith</p>
         </blockquote>
       </section>
     </div>
