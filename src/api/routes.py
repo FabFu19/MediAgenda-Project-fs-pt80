@@ -191,7 +191,7 @@ def schedule_calendly_appointment():
         headers = {"Authorization": f"Bearer {doctor.calendly}", "Content-Type": "application/json"}
         url = f"https://api.calendly.com/scheduling_links/{doctor.calendly}"
         
-        response = requests.post(url, headers=headers, json={"email": paciente.user.email})
+        response = request.post(url, headers=headers, json={"email": paciente.user.email})
         if response.status_code != 201:
             return jsonify({"error": "Error al agendar cita"}), 500
         
@@ -212,7 +212,7 @@ def cancel_calendly_appointment(appointment_id):
         headers = {"Authorization": f"Bearer {paciente.user.calendly}"}
         url = f"https://api.calendly.com/scheduled_events/{appointment_id}/cancellation"
         
-        response = requests.post(url, headers=headers, json={"reason": "Cancelación del usuario"})
+        response = request.post(url, headers=headers, json={"reason": "Cancelación del usuario"})
         if response.status_code != 204:
             return jsonify({"error": "Error al cancelar cita"}), 500
         
