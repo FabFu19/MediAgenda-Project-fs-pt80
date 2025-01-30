@@ -2,36 +2,197 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
 const specialties = [
+  "Allergist",
+  "Anesthesiologist",
   "Cardiologist",
+  "Dentist",
   "Dermatologist",
-  "Urologist",
-  "Neurologist",
-  "Pediatrician",
-  "Oncologist",
-  "Orthopedic",
-  "Psychiatrist",
-  "General Practitioner",
+  "Emergency",
   "Endocrinologist",
   "Gastroenterologist",
+  "General",
+  "Geneticist",
+  "Geriatrician",
+  "Gynecologist",
+  "Hematologist",
+  "Nephrologist",
+  "Neurologist",
+  "Oncologist",
   "Ophthalmologist",
-  "Dentist",
+  "Orthopedic",
+  "Otolaryngologist",
+  "Pathologist",
+  "Pediatrician",
+  "Psychiatrist",
+  "Pulmonologist",
+  "Radiologist",
+  "Rheumatologist",
+  "Surgeon",
+  "Urologist"
 ];
 
 const doctorsBySpecialty = {
+  Allergist: [
+    "Dr. Javier Gómez, Madrid, 28100",
+    "Dr. Carla Ríos, Madrid, 28002",
+    "Dr. Sergio Fernández, Madrid, 28083",
+    "Dr. Lucía Navarro, Madrid, 28034",
+  ],
+  Anesthesiologist: [
+    "Dr. Matías Soler, Madrid, 28055",
+    "Dr. Elena Torres, Madrid, 28106",
+    "Dr. Hugo Méndez, Madrid, 28077",
+    "Dr. Patricia Vidal, Madrid, 28058",
+  ],
   Cardiologist: [
-    "Dr. Orangel Hernandez, Madrid, Madrid 28047",
-    "Dr. Maria Lopez, Madrid, Madrid 28047",
-    "Dr. Juan Perez, Madrid, Madrid 28047",
+    "Dr. Nicolás Herrera, Madrid, 28089",
+    "Dr. Sofía Molina, Madrid, 28010",
+    "Dr. Andrés Pérez, Madrid, 28089",
+    "Dr. Claudia Ortega, Madrid, 28052",
+  ],
+  Dentist: [
+    "Dr. Ricardo Álvarez, Madrid, 28089",
+    "Dr. Mariana Guzmán, Madrid, 28014",
+    "Dr. Federico León, Madrid, 28065",
+    "Dr. Angela Salazar, Madrid, 28046",
   ],
   Dermatologist: [
-    "Dr. Laura Garcia, Madrid, Madrid 28047",
-    "Dr. Ana Martinez, Madrid, Madrid 28047",
-    "Dr. Sofia Gomez, Madrid, Madrid 28047",
+    "Dr. Valeria Martínez, Madrid, 28017",
+    "Dr. Fernando Castro, Madrid, 28089",
+    "Dr. Beatriz López, Madrid, 28019",
+    "Dr. Gabriel Sánchez, Madrid, 28089",
+  ],
+  Emergency: [
+    "Dr. Mario Díaz, Madrid, 28089",
+    "Dr. Ana Jiménez, Madrid, 28052",
+    "Dr. Tomás Roldán, Madrid, 28023",
+    "Dr. Camila Núñez, Madrid, 28089",
+  ],
+  Endocrinologist: [
+    "Dr. Samuel Herrera, Madrid, 28025",
+    "Dr. Elisa Cordero, Madrid, 28026",
+    "Dr. Pablo Vega, Madrid, 28027",
+    "Dr. Diana Paredes, Madrid, 28028",
+  ],
+  Gastroenterologist: [
+    "Dr. Raúl Morales, Madrid, 28029",
+    "Dr. Manuela Escobar, Madrid, 28030",
+    "Dr. Esteban Reyes, Madrid, 28031",
+    "Dr. Gloria Fuentes, Madrid, 28032",
+  ],
+  General: [
+    "Dr. Santiago Rivas, Madrid, 28033",
+    "Dr. Paula Medina, Madrid, 28034",
+    "Dr. Ernesto Domínguez, Madrid, 28035",
+    "Dr. Leticia Herrera, Madrid, 28036",
+  ],
+  Geneticist: [
+    "Dr. Javier Peña, Madrid, 28053",
+    "Dr. Lorena Ortega, Madrid, 28054",
+    "Dr. Manuel Rivas, Madrid, 28055",
+    "Dr. Beatriz Santos, Madrid, 28056",
+  ],
+  Geriatrician: [
+    "Dr. Fernando Ruiz, Madrid, 28037",
+    "Dr. Laura Suárez, Madrid, 28008",
+    "Dr. Antonio Vargas, Madrid, 28089",
+    "Dr. Teresa López, Madrid, 28040",
+  ],
+  Gynecologist: [
+    "Dr. Marta Peña, Madrid, 28089",
+    "Dr. Alicia Ramos, Madrid, 28042",
+    "Dr. José Luis Torres, Madrid, 28037",
+    "Dr. Silvia Gómez, Madrid, 28044",
+  ],
+  Hematologist: [
+    "Dr. Jorge Molina, Madrid, 28045",
+    "Dr. Clara Paredes, Madrid, 28037",
+    "Dr. Daniel Ríos, Madrid, 28047",
+    "Dr. Patricia Estévez, Madrid, 28037",
+  ],
+  Nephrologist: [
+    "Dr. Felipe Muñoz, Madrid, 28037",
+    "Dr. Natalia Herrera, Madrid, 28058",
+    "Dr. Andrés Castro, Madrid, 28059",
+    "Dr. Verónica López, Madrid, 28060",
+  ],
+  Neurologist: [
+    "Dr. Ignacio Romero, Madrid, 28073",
+    "Dr. Sofía Valdés, Madrid, 28037",
+    "Dr. Luis Ortega, Madrid, 28075",
+    "Dr. Carmen Ferrer, Madrid, 28037",
+  ],
+  Oncologist: [
+    "Dr. Emilio Gutiérrez, Madrid, 28037",
+    "Dr. Paula Montes, Madrid, 28078",
+    "Dr. Jorge Salinas, Madrid, 28037",
+    "Dr. Claudia Vega, Madrid, 28037",
+  ],
+  Ophthalmologist: [
+    "Dr. Andrés Vázquez, Madrid, 28037",
+    "Dr. Susana Gil, Madrid, 28086",
+    "Dr. Ramón Medina, Madrid, 28087",
+    "Dr. Natalia Fuentes, Madrid, 28037",
+  ],
+  Orthopedic: [
+    "Dr. Ricardo Gómez, Madrid, 28089",
+    "Dr. María López, Madrid, 28037",
+    "Dr. Esteban Rojas, Madrid, 28091",
+    "Dr. Julia Herrera, Madrid, 28092",
+  ],
+  Otolaryngologist: [
+    "Dr. Daniel Ruiz, Madrid, 28093",
+    "Dr. Andrea Pérez, Madrid, 28037",
+    "Dr. Oscar Vega, Madrid, 28095",
+    "Dr. Sandra Morales, Madrid, 28096",
+  ],
+  Pathologist: [
+    "Dr. Roberto Fernández, Madrid, 28081",
+    "Dr. Amelia Vargas, Madrid, 28037",
+    "Dr. Tomás Aguilar, Madrid, 28083",
+    "Dr. Lucía Márquez, Madrid, 28037",
+  ],
+  Pediatrician: [
+    "Dr. Carla Romero, Madrid, 28097",
+    "Dr. Luis Sanz, Madrid, 28037",
+    "Dr. Rosa Medina, Madrid, 28099",
+    "Dr. Hugo García, Madrid, 28037",
+  ],
+  Psychiatrist: [
+    "Dr. Emilio Sánchez, Madrid, 28101",
+    "Dr. Mariana Torres, Madrid, 28102",
+    "Dr. Samuel Gómez, Madrid, 28103",
+    "Dr. Patricia Rojas, Madrid, 28104",
+  ],
+  Pulmonologist: [
+    "Dr. Ignacio Martínez, Madrid, 28037",
+    "Dr. Teresa López, Madrid, 28106",
+    "Dr. Antonio Fuentes, Madrid, 28037",
+    "Dr. Camila Ortega, Madrid, 28108",
+  ],
+  Radiologist: [
+    "Dr. Esteban Pérez, Madrid, 28109",
+    "Dr. Ana Vargas, Madrid, 28110",
+    "Dr. Fernando Salinas, Madrid, 28111",
+    "Dr. Claudia Herrera, Madrid, 28112",
+  ],
+  Rheumatologist: [
+    "Dr. Lucía Domínguez, Madrid, 28113",
+    "Dr. Andrés Ríos, Madrid, 28114",
+    "Dr. Beatriz Sanz, Madrid, 28115",
+    "Dr. Javier Gómez, Madrid, 28116",
+  ],
+  Surgeon: [
+    "Dr. Pablo Navarro, Madrid, 28117",
+    "Dr. Laura Mendoza, Madrid, 28118",
+    "Dr. Juana Vargas, Madrid, 28110",
+    "Dr. Raul Salinas, Madrid, 28111",
   ],
   Urologist: [
-    "Dr. Roberto Sanchez, Madrid, Madrid 28047",
-    "Dr. Lucia Fernandez, Madrid, Madrid 28047",
-    "Dr. Carlos Ortega, Madrid, Madrid 28047",
+    "Dr. Tomás Herrera, Madrid, 28119",
+    "Dr. Adriana Ruiz, Madrid, 28120",
+    "Dr. Ana Perez, Madrid, 28110",
+    "Dr. Fernando Gomez, Madrid, 28111",
   ],
 };
 
@@ -134,9 +295,8 @@ export const Calendar = () => {
             {doctors.map((doctor, index) => (
               <li
                 key={index}
-                className={`appointment-doctor-item ${
-                  selectedDoctor === doctor ? "selected" : ""
-                }`}
+                className={`appointment-doctor-item ${selectedDoctor === doctor ? "selected" : ""
+                  }`}
                 onClick={() => handleSelectDoctor(doctor)}
               >
                 {doctor}
@@ -156,9 +316,8 @@ export const Calendar = () => {
               {Array.from({ length: days }, (_, i) => i + 1).map((day) => (
                 <div
                   key={day}
-                  className={`appointment-calendar-day ${
-                    selectedDate?.getDate() === day ? "selected" : ""
-                  }`}
+                  className={`appointment-calendar-day ${selectedDate?.getDate() === day ? "selected" : ""
+                    }`}
                   onClick={() => handleDayClick(day)}
                 >
                   {day}
