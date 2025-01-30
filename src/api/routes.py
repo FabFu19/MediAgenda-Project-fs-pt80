@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint, session
+from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, Users, Pacientes, Especialistas, DisponibilidadMedico, Citas, List_Tokens
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
@@ -15,7 +15,7 @@ import os
 api = Blueprint('api', __name__)
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-CLIENT_SECRET_FILE = "./client_secret_831312741763-cvt9b3pom0aj77944vooavva9kt5esm6.apps.googleusercontent.com.json"
+CLIENT_SECRET_FILE = "./client_secret.json" 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
 # Flujo de OAuth
