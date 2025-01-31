@@ -1,15 +1,8 @@
 {
     "_meta": {
         "hash": {
-<<<<<<< HEAD
-            "sha256": "e9815cfdb1215e031e8567d58f070149f9fc6fb1bdd20d75b2705b16cdff613b"
-=======
-<<<<<<< HEAD
-            "sha256": "17cd534788c4d69bc0aef2c35d549a1b88fadc3eb863b0ac10f19c99ec86da11"
-=======
+
             "sha256": "b284b3da79a9596c1ae79819810117fc152bd2c522deb143b013787f89a45201"
->>>>>>> c3e12436edceb038cb971c1db3a5d69846f3366e
->>>>>>> 31d6988ecd761c95fdbf28b6c73eaec33c2849b6
         },
         "pipfile-spec": 6,
         "requires": {
@@ -152,7 +145,6 @@
             "index": "pypi",
             "version": "==2.38.0"
         },
-<<<<<<< HEAD
         "google-auth-httplib2": {
             "hashes": [
                 "sha256:38aa7badf48f974f1eb9861794e9c0cb2a0511a4ec0679b1f886d108f5640e05",
@@ -177,8 +169,7 @@
             "markers": "python_version >= '3.7'",
             "version": "==1.66.0"
         },
-=======
->>>>>>> 31d6988ecd761c95fdbf28b6c73eaec33c2849b6
+
         "greenlet": {
             "hashes": [
                 "sha256:0153404a4bb921f0ff1abeb5ce8a5131da56b953eda6e14b88dc6bbc04d2049e",
@@ -266,8 +257,7 @@
             "index": "pypi",
             "version": "==23.0.0"
         },
-<<<<<<< HEAD
-=======
+
         "idna": {
             "hashes": [
                 "sha256:12f65c9b470abda6dc35cf8e63cc574b1c52b11df2c86030af0ac09b01b13ea9",
@@ -276,7 +266,6 @@
             "markers": "python_version >= '3.6'",
             "version": "==3.10"
         },
->>>>>>> c3e12436edceb038cb971c1db3a5d69846f3366e
         "itsdangerous": {
             "hashes": [
                 "sha256:c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef",
@@ -583,8 +572,7 @@
             "markers": "python_version >= '3.8'",
             "version": "==6.0.2"
         },
-<<<<<<< HEAD
-=======
+
         "requests": {
             "hashes": [
                 "sha256:55365417734eb18255590a9ff9eb97e9e1da868d4ccd6402399eaf68af20a760",
@@ -593,7 +581,7 @@
             "index": "pypi",
             "version": "==2.32.3"
         },
->>>>>>> c3e12436edceb038cb971c1db3a5d69846f3366e
+
         "rsa": {
             "hashes": [
                 "sha256:90260d9058e514786967344d0ef75fa8727eed8a7d2e43ce9f4bcf1b536174f7",
