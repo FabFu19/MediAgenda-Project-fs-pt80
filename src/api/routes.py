@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, session
 from api.models import db, Users, Pacientes, Especialistas, DisponibilidadMedico, Citas, List_Tokens
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
@@ -151,76 +151,6 @@ def get_profile():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@api.route('/calendly/availability', methods=['GET'])
-@jwt_required()
-def get_calendly_availability():
-    try:
-        current_user = get_jwt_identity()
-        especialista = Especialistas.query.filter_by(user_id=current_user).first()
-        if not especialista or not especialista.calendly:
-            return jsonify({"error": "No autorizado o no tiene Calendly configurado"}), 403
-        
-        headers = {"Authorization": f"Bearer {especialista.calendly}"}
-        url = "https://api.calendly.com/scheduling_links"
-
-        response = request.get(url, headers=headers)
-        if response.status_code != 200:
-            return jsonify({"error": "Error al obtener disponibilidad"}), 500
-        
-        return jsonify(response.json()), 200
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    
-@api.route('/calendly/schedule', methods=['POST'])
-@jwt_required()
-def schedule_calendly_appointment():
-    try:
-        current_user = get_jwt_identity()
-        paciente = Pacientes.query.filter_by(user_id=current_user).first()
-        # if not paciente:
-        #     return jsonify({"error": "No autorizado"}), 403
-
-        data = request.json
-        doctor_id = data.get("doctor_id")
-        doctor = Especialistas.query.get(doctor_id)
-
-        if not doctor or not doctor.calendly:
-            return jsonify({"error": "Doctor no encontrado o sin Calendly"}), 404
-
-        headers = {"Authorization": f"Bearer {doctor.calendly}", "Content-Type": "application/json"}
-        url = f"https://api.calendly.com/scheduling_links/{doctor.calendly}"
-        
-        response = request.post(url, headers=headers, json={"email": paciente.user.email})
-        if response.status_code != 201:
-            return jsonify({"error": "Error al agendar cita"}), 500
-        
-        return jsonify(response.json()), 201
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-@api.route('/calendly/cancel/<string:appointment_id>', methods=['DELETE'])
-@jwt_required()
-def cancel_calendly_appointment(appointment_id):
-    try:
-        current_user = get_jwt_identity()
-        paciente = Pacientes.query.filter_by(user_id=current_user).first()
-        # if not paciente:
-        #     return jsonify({"error": "No autorizado"}), 403
-
-        headers = {"Authorization": f"Bearer {paciente.user.calendly}"}
-        url = f"https://api.calendly.com/scheduled_events/{appointment_id}/cancellation"
-        
-        response = request.post(url, headers=headers, json={"reason": "Cancelación del usuario"})
-        if response.status_code != 204:
-            return jsonify({"error": "Error al cancelar cita"}), 500
-        
-        return jsonify({"msg": "Cita cancelada exitosamente"}), 200
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
 @api.route('/auth/google', methods=['GET'])
 def google_auth():
     auth_url, state = flow.authorization_url(prompt="consent")
@@ -248,8 +178,8 @@ def crear_disponibilidad():
     try:
         current_user = get_jwt_identity()
         especialista = Especialistas.query.filter_by(user_id=current_user).first()
-        if not especialista:
-            return jsonify({'error': 'No autorizado'}), 403
+        # if not especialista:
+        #     return jsonify({'error': 'No autorizado'}), 403
         
         data = request.json
         fecha = data['fecha']
@@ -264,8 +194,8 @@ def crear_disponibilidad():
         event_body = {
             "summary": "Disponibilidad del Médico",
             "description": f"El Dr. {especialista.user.nombre} {especialista.user.apellido} está disponible en este horario.",
-            "start": {"dateTime": start_time, "timeZone": "America/New_York"},
-            "end": {"dateTime": end_time, "timeZone": "America/New_York"},
+            "start": {"dateTime": start_time, "timeZone": "Europe/Madrid"},
+            "end": {"dateTime": end_time, "timeZone": "Europe/Madrid"},
         }
 
         event = service.events().insert(calendarId="primary", body=event_body).execute()
@@ -303,8 +233,8 @@ def agendar_cita():
 
         event_body = {
             "summary": f"Cita con Dr. {medico.user.nombre} {medico.user.apellido}",
-            "start": {"dateTime": start_time, "timeZone": "America/New_York"},
-            "end": {"dateTime": end_time, "timeZone": "America/New_York"},
+            "start": {"dateTime": start_time, "timeZone": "Europe/Madrid"},
+            "end": {"dateTime": end_time, "timeZone": "Europe/Madrid"},
             "attendees": [{"email": medico.user.email}]
         }
 

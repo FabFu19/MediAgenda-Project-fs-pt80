@@ -12,7 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             availability: [],
             googleAuthUrl: "",
         },
-
+       
         actions: {
             register: async (userData) => {
                 try {

@@ -24,12 +24,9 @@ wtforms = "==3.1.2"
 google-auth = "*"
 flask-session = "*"
 requests = "*"
-<<<<<<< HEAD
 google-auth-httplib2 = "*"
-=======
 google-auth-oauthlib = "*"
 google-api-python-client = "*"
->>>>>>> 31d6988ecd761c95fdbf28b6c73eaec33c2849b6
 
 [requires]
 python_version = "3.10"
