@@ -25,6 +25,7 @@ google-auth = "*"
 google-auth-oauthlib = "*"
 flask-session = "*"
 requests = "*"
+google-auth-httplib2 = "*"
 
 [requires]
 python_version = "3.10"
