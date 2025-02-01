@@ -5,6 +5,7 @@ import image16 from "../../img/doctor8.png";
 import image17 from "../../img/doctor10.png";
 
 
+
 export const Home = () => {
   return (
     <div className="home_body">
@@ -110,7 +111,7 @@ export const Home = () => {
         <h2>Find Your Doctor</h2>
         <div className="search-bar">
           <input type="text" placeholder="Orangel Hernandez" className="search-input" />
-          <button className="search-button">🔍</button>
+          <button className="search-button"><i class="fa-solid fa-magnifying-glass custom-color"></i></button>
         </div>
       </section>
 
