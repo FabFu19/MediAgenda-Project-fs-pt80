@@ -8,9 +8,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             availability: [],
             loading: false,
             error: null,
-            calendlyAvailability: [],
+            appointments: [],
+            availability: [],
+            googleAuthUrl: "",
         },
-
+       
         actions: {
             register: async (userData) => {
                 try {
@@ -101,63 +103,73 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            getCalendlyAvailability: async () => {
-                const { token } = getStore();
-                try {
-                  const resp = await fetch(`${process.env.BACKEND_URL}/api/calendly/availability`, {
-                    headers: { Authorization: `Bearer ${token}` },
+            googleAuth: async () => {
+              try {
+                  const response = await fetch(`${process.env.BACKEND_URL}/api/auth/google`);
+                  const data = await response.json();
+                  return data.auth_url;
+              } catch (error) {
+                  console.error("Error en la autenticación con Google:", error);
+              }
+          },
+
+          fetchAvailability: async () => {
+              const { token } = getStore();
+              try {
+                  const resp = await fetch(`${process.env.BACKEND_URL}/api/disponibilidad`, {
+                      headers: { Authorization: `Bearer ${token}` },
                   });
-        
+
                   if (resp.ok) {
-                    const data = await resp.json();
-                    setStore({ calendlyAvailability: data });
-                  } else {
-                    console.error("Error al obtener disponibilidad de Calendly.");
+                      const data = await resp.json();
+                      setStore({ availability: data });
                   }
-                } catch (error) {
-                  console.error("Error en getCalendlyAvailability:", error);
-                }
-              },
-        
-              scheduleCalendlyAppointment: async (doctor_id) => {
-                const { token } = getStore();
-                try {
-                  const resp = await fetch(`${process.env.BACKEND_URL}/api/calendly/schedule`, {
-                    method: "POST",
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ doctor_id }),
+              } catch (error) {
+                  console.error("Error al obtener disponibilidad:", error);
+              }
+          },
+
+          createAvailability: async (availabilityData) => {
+              const { token } = getStore();
+              try {
+                  const resp = await fetch(`${process.env.BACKEND_URL}/api/disponibilidad`, {
+                      method: "POST",
+                      headers: {
+                          Authorization: `Bearer ${token}`,
+                          "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(availabilityData),
                   });
-        
+
                   if (resp.ok) {
-                    console.log("Cita agendada con éxito en Calendly.");
-                  } else {
-                    console.error("Error al agendar la cita.");
+                      getActions().fetchAvailability();
+                      console.log("Disponibilidad creada con éxito.");
                   }
-                } catch (error) {
-                  console.error("Error en scheduleCalendlyAppointment:", error);
-                }
-              },
-        
-              cancelCalendlyAppointment: async (appointment_id) => {
-                const { token } = getStore();
-                try {
-                  const resp = await fetch(`${process.env.BACKEND_URL}/api/calendly/cancel/${appointment_id}`, {
-                    method: "DELETE",
-                    headers: { Authorization: `Bearer ${token}` },
+              } catch (error) {
+                  console.error("Error en createAvailability:", error);
+              }
+          },
+
+          scheduleAppointment: async (appointmentData) => {
+              const { token } = getStore();
+              try {
+                  const resp = await fetch(`${process.env.BACKEND_URL}/api/citas`, {
+                      method: "POST",
+                      headers: {
+                          Authorization: `Bearer ${token}`,
+                          "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(appointmentData),
                   });
-        
+
                   if (resp.ok) {
-                    console.log("Cita cancelada con éxito en Calendly.");
-                  } else {
-                    console.error("Error al cancelar la cita.");
+                      getActions().fetchAppointments();
+                      console.log("Cita agendada con éxito.");
                   }
-                } catch (error) {
-                  console.error("Error en cancelCalendlyAppointment:", error);
-                }
-              },
+              } catch (error) {
+                  console.error("Error en scheduleAppointment:", error);
+              }
+          },
         },
     };
 };
