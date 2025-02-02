@@ -4,6 +4,7 @@ import image15 from "../../img/doctor9.png";
 import image16 from "../../img/doctor8.png";
 import image17 from "../../img/doctor10.png";
 
+
 export const Home = () => {
   return (
     <div className="home_body">
@@ -29,28 +30,26 @@ export const Home = () => {
             <div className="hero-image d-flex">
               <img src={group21Image} alt="Laptop with calendar" />
             </div>
-          </div>
+          </div>
        </div>
       </section>
 
       {/* Sección "What do we do?" */}
       <section className="container py-5">
-  <div className="row align-items-center what-we-do">
-    {/* Título alineado a la izquierda */}
-    <div className="col-md-4 text-md-start text-center">
-      <h2>What do we do?</h2>
-    </div>
-    {/* Párrafo alineado a la derecha */}
-    <div className="col-md-8 text-md-end text-center">
-      <p>
-        We developed a comprehensive solution to manage medical consultations
-        efficiently and securely. We facilitate appointment scheduling, access
-        to medical records, and communication between patients and doctors,
-        optimizing administrative processes for clinics and offices.
-      </p>
-    </div>
-  </div>
-</section> 
+        <div className="row align-items-center what-we-do">
+          <div className="col-md-4 text-md-start text-center">
+            <h2>What do we do?</h2>
+          </div>
+          <div className="col-md-8 text-md-end text-center">
+            <p>
+               We developed a comprehensive solution to manage medical consultations
+               efficiently and securely. We facilitate appointment scheduling, access
+               to medical records, and communication between patients and doctors,
+               optimizing administrative processes for clinics and offices.
+            </p>
+          </div>
+        </div>
+      </section> 
 
 {/* Carrusel de Profesionales */}
 <section className="professional-slide">
@@ -107,7 +106,7 @@ export const Home = () => {
         <h2>Find Your Doctor</h2>
         <div className="search-bar">
           <input type="text" placeholder="Orangel Hernandez" className="search-input" />
-          <button className="search-button">🔍</button>
+          <button className="search-button"><i class="fa-solid fa-magnifying-glass custom-color"></i></button>
         </div>
       </section>
 
