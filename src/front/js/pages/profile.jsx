@@ -8,29 +8,28 @@ import { PatientCalendar } from "../component/patient_calendar.jsx";
 export const Profile = () => {
     const { store, actions } = useContext(Context);
 
-    // useEffect(() => {
+    useEffect(() => {
         
-    //     if (!store.user) {
-    //         actions.getProfile();
-    //     }
-    // }, []);
+        if (!store.user) {
+            actions.getProfile();
+        }
+    }, []);
 
     return (
         <>
             <div className="profile-body">
                 <div className="container text-start">
                     <div className="row">
-                        {/* <PatientProfile /> 
-                        <Doctor /> */}
-                        {/* <DoctorCalendar /> */}
-                        <PatientCalendar />
+                        <PatientProfile /> 
+                        <Doctor />
+                        
                     </div>
                 </div>
-                {/* <div className="profile-container container">
+                <div className="profile-container container">
                     <div className="row">
                         {store.role === "paciente" ? <PatientProfile /> : <Doctor />}
                     </div>
-                </div> */}
+                </div>
                 
             </div>
         </>
