@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+import { DoctorCalendar } from "./doctor_calendar.jsx";
 
 const specialties = [
   "Allergist",
@@ -366,6 +367,7 @@ export const Calendar = () => {
           </div>
         )}
       </div>
+      <DoctorCalendar />
     </>
   );
 };

@@ -73,7 +73,6 @@
 		]
 	},
 	"dependencies": {
-
 		"@fortawesome/fontawesome-free": "^6.7.2",
 		"@fortawesome/fontawesome-svg-core": "^6.7.2",
 		"@fortawesome/free-solid-svg-icons": "^6.7.2",
@@ -82,8 +81,9 @@
 		"gapi-script": "^1.2.0",
 		"googleapis": "^144.0.0",
 		"prop-types": "^15.6.1",
-		"react": "^16.8.4",
-		"react-dom": "^16.8.4",
+		"react": "^19.0.0",
+		"react-calendar": "^5.1.0",
+		"react-dom": "^19.0.0",
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^6.3.0"
 	}
