@@ -71,7 +71,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                     if (!response.ok) throw new Error("Error obteniendo perfil");
                     const data = await response.json();
-                    setStore({ user: data.user, role: data.role, loading: false });
+                    setStore({ user: data.user, role: data.user.paciente ? "paciente" : "especialista", loading: false });
                 } catch (error) {
                     console.error("Error en getProfile:", error);
                 }
