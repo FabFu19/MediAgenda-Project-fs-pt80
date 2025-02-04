@@ -5,22 +5,25 @@ body {
 }
 .profile-body{
     background-color: rgba(205, 199, 237, 0.25);
+    padding: 30px 0 45px 0px;    
     
 }
 .prof-pinci-title{
     font-family: "Alata", serif;
     color: #3E2F9C;
     font-size: 34px;
-    margin-top: 20px;
+    /* padding-top: 20px; */
+    padding-bottom: 10px;
 }
+
 .profile-container{
-    padding: 15px;
+    padding: 30px 15px 40px 15px;
     
 }
 .content-data-profile{
     width: 80%;
     background-color: rgba(111, 76, 176, 0.45);
-    height: 350px;
+    height: 100%;
     border-radius: 21px;
     padding: 30px 19px 25px 19px;
     display: flex;
@@ -44,6 +47,7 @@ body {
 .prof-edit-icon{
     font-size: 21px;
     color: #ffff;
+    cursor: pointer;
 }
 .dot-states{
     display: flex;
@@ -60,28 +64,17 @@ body {
     background-color: transparent;
     border: transparent;
 }
-.beautifier {
-    background-color: #2f4fff;
-    box-shadow: 0px 0px 4px black;
-    opacity: 1 !important;
-}
-.tooltip.bs-tooltip-right.tooltip-arrow::before {
-    border-right-color: #2f4fff !important;
-}
-.tooltip.bs-tooltip-left.tooltip-arrow::before {
-    border-left-color: #2f4fff !important;
-}
-.tooltip.bs-tooltip-bottom.tooltip-arrow::before {
-    border-bottom-color: #2f4fff !important;
-}
-.tooltip.bs-tooltip-top.tooltip-arrow::before {
-    border-top-color: #2f4fff !important;
-}
 
 .dot-states img {
     width: 25px;
     height: 25px;
     cursor: pointer;
+}
+
+.tool-status{
+    --bs-tooltip-bg: rgba(255, 255, 255, 0.7);
+    --bs-tooltip-color: #3E2F9C;
+    --bs-font-sans-serif: "Gantari";
 }
 
 
@@ -131,7 +124,6 @@ body {
     padding: 27px 16px 27px 16px;
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
 }
 .prof-sec-title{
     font-family: "Alata", serif;
@@ -139,6 +131,10 @@ body {
     font-size: 19px;
     align-self: center;
     margin-bottom: 14px;
+}
+
+.content-scroll-list{
+    height: 395px;
 }
 .prof-list-container > ul{
     padding-left: 0;
@@ -151,6 +147,7 @@ body {
     display: flex;
     align-items: center;
     list-style-type: none;
+    margin-bottom: 10px;
 }
 
 .data-text-appoint{
@@ -184,6 +181,26 @@ body {
     margin-left: 10px;
     margin-right: 10px;
 }
+.no-appoint-msg{
+    color:#3E2F9C;
+    font-family: "Alata", serif;
+    font-size: 15px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Doctor-profile css */
+/* .doctor-profile .esp-pic {
+    height: 207px;
+    width: 190px;
+    margin-top: 4px;
+}
+.doctor-profile .choose-speci-box {
+    padding: 10px 15px 0 15px;
+} */
+/* Responsive */ 
 
 @media (width <= 915px) {
     .content-data-profile{
