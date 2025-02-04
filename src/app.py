@@ -12,6 +12,7 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
 from datetime import datetime, timedelta, timezone
+from flask_session import Session
 
 # from models import Person
 
@@ -23,8 +24,10 @@ app.url_map.strict_slashes = False
 
 app.config["JWT_SECRET_KEY"] = os.getenv('JWT_SECRET_KEY')
 jwt = JWTManager(app)
-
 #app.config("JWT_ACCESS_TOKEN_EXPIRES") = datetime(hours=1)
+app.secret_key = os.getenv("FLASK_SECRET_KEY", "supersecreto") 
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -41,6 +44,12 @@ db.init_app(app)
 # @api.before_first_req
 # def setup_database():
 #     db.createall()
+
+
+
+
+
+
 
 # add the admin
 setup_admin(app)
